@@ -4,10 +4,12 @@
 #include <QDir>
 #include <QCoreApplication>
 
-ProcessLauncherThread::ProcessLauncherThread()
+
+ProcessLauncherThread::ProcessLauncherThread(QString file, QStringList args, QString process_type) : QThread(), processType(process_type), processFile(file), processArgs(args)
 {
 
 }
+
 QByteArray ProcessLauncherThread::run_internal_script(QString scriptFile, QStringList scriptArgs)
 {
     QString program = qApp->applicationDirPath().append(QDir::separator()).append("scripts").append(QDir::separator()).append(QString(scriptFile));
