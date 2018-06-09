@@ -16,5 +16,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
+    src_interfaces/clicontroller.cpp \
+    src_interfaces/websocketcontroller.cpp \
+    src_interfaces/logincontroller.cpp \
+    src_websocket/websocketserver.cpp \
+    src_interfaces/processcontroller.cpp \
+    src_process/processlauncherthread.cpp
 
 HEADERS += \
+    clicontroller.h \
+    src_interfaces/clicontroller.h \
+    src_interfaces/websocketcontroller.h \
+    src_interfaces/logincontroller.h \
+    src_websocket/websocketserver.h \
+    src_interfaces/processcontroller.h \
+    src_process/processlauncherthread.h
