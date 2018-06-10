@@ -6,6 +6,7 @@
 
 class ProcessLauncherThread : public QThread
 {
+    Q_OBJECT
 public:
     // args:
     // relative path if
@@ -21,8 +22,13 @@ public:
     QString processType;
     QString processFile;
     QStringList processArgs;
+signals:
+    void outputWritten(QByteArray output);
 public slots:
    QByteArray run_internal_script(QString scriptFile, QStringList scriptArgs);
+   QByteArray run_external_script(QString scriptFile, QStringList scriptArgs);
+protected:
+   void run();
 };
 
 #endif // PROCESSLAUNCHERTHREAD_H

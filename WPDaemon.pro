@@ -1,5 +1,5 @@
 QT -= gui
-QT += core network websockets
+QT += core network websockets webchannel
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -21,7 +21,10 @@ SOURCES += main.cpp \
     src_interfaces/logincontroller.cpp \
     src_websocket/websocketserver.cpp \
     src_interfaces/processcontroller.cpp \
-    src_process/processlauncherthread.cpp
+    src_process/processlauncherthread.cpp \
+    src_interfaces/clientinteraction.cpp \
+    src_wrappers/websocketclientwrapper.cpp \
+    src_websocket/websockettransport.cpp
 
 HEADERS += \
     clicontroller.h \
@@ -30,4 +33,7 @@ HEADERS += \
     src_interfaces/logincontroller.h \
     src_websocket/websocketserver.h \
     src_interfaces/processcontroller.h \
-    src_process/processlauncherthread.h
+    src_process/processlauncherthread.h \
+    src_interfaces/clientinteraction.h \
+    src_wrappers/websocketclientwrapper.h \
+    src_websocket/websockettransport.h
