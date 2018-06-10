@@ -11,7 +11,7 @@ class ClientInteraction : public QObject
     Q_OBJECT
 public:
     explicit ClientInteraction(QObject *parent = nullptr);
-
+    LoginController* loginController;
 signals:
 
 public slots:

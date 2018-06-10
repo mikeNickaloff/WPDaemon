@@ -3,6 +3,7 @@
 #include <QWebChannel>
 #include <QWebSocketServer>
 #include "../src_wrappers/websocketclientwrapper.h"
+#include "../src_websocket/websockettransport.h"
 #include "../src_interfaces/clientinteraction.h"
 WebSocketController::WebSocketController(QObject *parent) : QObject(parent)
 {
