@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res_python/simple_https_server.py</file>
+        <file>res_html/index.html</file>
+        <file>res_html/qwebchannel.js</file>
+        <file>res_scripts/hello.sh</file>
+        <file>res_scripts/start_https.sh</file>
+    </qresource>
+</RCC>
