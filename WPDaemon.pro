@@ -28,7 +28,6 @@ SOURCES += main.cpp \
     src_interfaces/databasecontroller.cpp
 
 HEADERS += \
-    clicontroller.h \
     src_interfaces/clicontroller.h \
     src_interfaces/websocketcontroller.h \
     src_interfaces/logincontroller.h \
