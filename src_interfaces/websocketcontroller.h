@@ -3,6 +3,9 @@
 
 #include <QObject>
 
+class WebSocketServer;
+class ClientInteraction;
+class LoginController;
 class WebSocketController : public QObject
 {
     Q_OBJECT

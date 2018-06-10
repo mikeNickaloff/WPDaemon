@@ -3,12 +3,13 @@
 
 #include <QObject>
 #include <QHash>
+#include <QUuid>
 class LoginController : public QObject
 {
     Q_OBJECT
 public:
     explicit LoginController(QObject *parent = nullptr);
-    QHash<
+    QHash<QUuid, QString> loginTokens;
 signals:
 
 public slots:
