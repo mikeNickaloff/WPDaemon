@@ -3,12 +3,14 @@
 
 #include <QObject>
 #include <QSqlDatabase>
+class AssetUnpacker;
 class DatabaseController : public QObject
 {
     Q_OBJECT
 public:
-    explicit DatabaseController(QObject *parent = nullptr);
+    explicit DatabaseController(QObject *parent = nullptr, AssetUnpacker* i_unpacker = nullptr);
     ~DatabaseController();
+    AssetUnpacker* m_assets;
     QSqlDatabase db;
 signals:
 

@@ -15,6 +15,10 @@ public:
 signals:
 
 public slots:
+private:
+    QString hello_str;
+private slots:
+    void hello();
 };
 
 #endif // LOGINCONTROLLER_H

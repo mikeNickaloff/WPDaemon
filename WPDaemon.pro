@@ -26,7 +26,8 @@ SOURCES += main.cpp \
     src_wrappers/websocketclientwrapper.cpp \
     src_websocket/websockettransport.cpp \
     src_interfaces/databasecontroller.cpp \
-    src_assets/assetunpacker.cpp
+    src_assets/assetunpacker.cpp \
+    src_websocket/websocketclient.cpp
 
 HEADERS += \
     src_interfaces/clicontroller.h \
@@ -39,7 +40,8 @@ HEADERS += \
     src_wrappers/websocketclientwrapper.h \
     src_websocket/websockettransport.h \
     src_interfaces/databasecontroller.h \
-    src_assets/assetunpacker.h
+    src_assets/assetunpacker.h \
+    src_websocket/websocketclient.h
 
 RESOURCES += \
     resources.qrc

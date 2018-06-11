@@ -30,29 +30,14 @@
             socket.onopen = function() {
                 window.channel = new QWebChannel(socket, function(channel) {
                     //connect to the changed signal of a property
-                    channel.objects.chatserver.userListChanged.connect(function() {
-                        $('#userlist').empty();
-                        //access the property
-                        channel.objects.chatserver.userList.forEach(function(user) {
-                            $('#userlist').append(user + '<br>');
-                        });
-                    });
-                    //connect to a signal
-                    channel.objects.chatserver.newMessage.connect(function(time, user, message) {
-                        $('#chat').append("[" + time + "] " + user + ": " + message + '<br>');
-                    });
-                    //connect to a signal
-                    channel.objects.chatserver.keepAlive.connect(function(args) {
-                        if (window.loggedin) {
-                            //call a method
-                            channel.objects.chatserver.keepAliveResponse($('#loginname').val())
-                            console.log("sent alive");
-                        }
-                    });
+		console.log("connected to " + window.channel);
 
-                });
-            }
+	       channel.objects.clientInteraction.requireLogin.connect(function() {
+		$('#loginDialog').show();
+	       });
+            });
         }
+}
     </script>
 </head>
 <body>
@@ -74,7 +59,7 @@
 
     function submitForm(event) {
         console.log("DEBUG login: " + channel);
-        channel.objects.chatserver.login($('#loginname').val(), function(arg) {
+	console.log(channel.objects.clientInteraction.login_request($('#loginname').val(), "none", function(arg) {
             console.log("DEBUG login response: " + arg);
             if (arg === true) {
                 $('#loginError').hide();
@@ -83,7 +68,7 @@
             } else {
                 $('#loginError').show();
             }
-        });
+        }));
         console.log($('#loginname').val());
         if (event !== undefined)
             event.preventDefault();

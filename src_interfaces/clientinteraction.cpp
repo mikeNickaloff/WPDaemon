@@ -1,11 +1,12 @@
 #include "clientinteraction.h"
 #include "logincontroller.h"
-ClientInteraction::ClientInteraction(QObject *parent) : QObject(parent)
+#include "databasecontroller.h"
+ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login) : QObject(parent), loginController(i_login)
 {
 
 }
 
-void ClientInteraction::login_request(QString username, QString password)
+bool ClientInteraction::login_request(QString username, QString password)
 {
-
+return true;
 }
