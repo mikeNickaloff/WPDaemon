@@ -1,5 +1,5 @@
 QT -= gui
-QT += core network websockets
+QT += core network websockets webchannel sql
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -21,13 +21,25 @@ SOURCES += main.cpp \
     src_interfaces/logincontroller.cpp \
     src_websocket/websocketserver.cpp \
     src_interfaces/processcontroller.cpp \
-    src_process/processlauncherthread.cpp
+    src_process/processlauncherthread.cpp \
+    src_interfaces/clientinteraction.cpp \
+    src_wrappers/websocketclientwrapper.cpp \
+    src_websocket/websockettransport.cpp \
+    src_interfaces/databasecontroller.cpp \
+    src_assets/assetunpacker.cpp
 
 HEADERS += \
-    clicontroller.h \
     src_interfaces/clicontroller.h \
     src_interfaces/websocketcontroller.h \
     src_interfaces/logincontroller.h \
     src_websocket/websocketserver.h \
     src_interfaces/processcontroller.h \
-    src_process/processlauncherthread.h
+    src_process/processlauncherthread.h \
+    src_interfaces/clientinteraction.h \
+    src_wrappers/websocketclientwrapper.h \
+    src_websocket/websockettransport.h \
+    src_interfaces/databasecontroller.h \
+    src_assets/assetunpacker.h
+
+RESOURCES += \
+    resources.qrc
