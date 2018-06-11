@@ -5,8 +5,19 @@ ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login) 
 {
 
 }
-
-bool ClientInteraction::login_request(QString username, QString password)
+/* TO DO
+ * - SETUP LOGIN SYSTEM
+ * - SETUP SIGNALS/SLOTS FOR HANDLING REQUESTS SECURELY
+*/
+bool ClientInteraction::login(QString username, QString password)
 {
-return true;
+    if (loginController->loggedIn == false) {
+        if (loginController->check_login(username, password) == true) {
+            return true;
+        }
+    } else {
+
+        return true;
+    }
+    return false;
 }

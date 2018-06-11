@@ -17,5 +17,5 @@ import os
 
 os.chdir('../public')
 httpd = BaseHTTPServer.HTTPServer(('127.0.0.1', 65531), SimpleHTTPServer.SimpleHTTPRequestHandler)
-#httpd.socket = ssl.wrap_socket(httpd.socket, certfile='../fullchain.pem', keyfile='../key.pem', server_side=True, ssl_version=ssl.PROTOCOL_TLSv1_2)
+#httpd.socket = ssl.wrap_socket(httpd.socket, certfile='../fullchain.cert', keyfile='../fullchain.key', server_side=True, ssl_version=ssl.PROTOCOL_TLSv1_2)
 httpd.serve_forever() 

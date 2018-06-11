@@ -12,13 +12,17 @@ public:
     explicit LoginController(QObject *parent = nullptr, DatabaseController* i_db = nullptr);
     QHash<QUuid, QString> loginTokens;
     DatabaseController* m_db;
+    bool check_login(QString username, QString password);
+    bool loggedIn;
 signals:
 
 public slots:
+
 private:
     QString hello_str;
 private slots:
     void hello();
+
 };
 
 #endif // LOGINCONTROLLER_H

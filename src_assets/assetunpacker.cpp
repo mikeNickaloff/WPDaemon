@@ -23,13 +23,15 @@ QString AssetUnpacker::appDirectory(QString subdirectory)
 void AssetUnpacker::unpack(QString resourceDir, QString targetDir)
 {
     QDir dir(QString(":/%1").arg(resourceDir));
-    dir.mkdir(appDirectory(targetDir));
+    dir.mkpath(appDirectory(targetDir));
     QFileInfoList list = dir.entryInfoList();
          std::cout << "     Bytes Filename" << std::endl;
          for (int i = 0; i < list.size(); ++i) {
              QFileInfo fileInfo = list.at(i);
              std::cout << qPrintable(QString("%1 %2").arg(fileInfo.size(), 10)
-                                                     .arg(fileInfo.fileName()));
+                                     .arg(fileInfo.fileName()));
+             QFile r1 (QString(appDirectory(targetDir).append(QDir::separator()).append(fileInfo.fileName())));
+             r1.remove();
              QFile f1(QString(":/%2/%1").arg(fileInfo.fileName()).arg(resourceDir));
 
              f1.copy(QString(appDirectory(targetDir).append(QDir::separator()).append(fileInfo.fileName())));

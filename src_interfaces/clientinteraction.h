@@ -12,9 +12,11 @@ class ClientInteraction : public QObject
 public:
     explicit ClientInteraction(QObject *parent = nullptr, LoginController *i_login = nullptr);
     LoginController* loginController;
-    Q_INVOKABLE bool login_request(QString username, QString password);
+    Q_INVOKABLE bool login(QString username, QString password);
 signals:
     void requireLogin();
+    void LoginSuccessful();
+    void LoginFailed();
 public slots:
 
 };
