@@ -3,12 +3,23 @@
 #include "./websockettransport.h"
 #include "../src_interfaces/databasecontroller.h"
 #include "../src_interfaces/logincontroller.h"
-WebSocketClient::WebSocketClient(QObject *parent, WebSocketTransport* client, DatabaseController* i_db) : QObject(parent), m_db(i_db)
+#include "../src_interfaces/firewallcontroller.h"
+#include <QWebSocket>
+#include <QtDebug>
+WebSocketClient::WebSocketClient(QObject *parent, WebSocketTransport* i_client, DatabaseController* i_db, FirewallController *i_firewall) : QObject(parent), m_client(i_client), m_db(i_db), m_firewall(i_firewall)
 {
  channel = new QWebChannel(this);
  m_login = new LoginController(this, m_db);
-     clientGateway = new ClientInteraction(this, m_login);
+     clientGateway = new ClientInteraction(this, m_login, m_firewall);
+     this->connect(clientGateway, &ClientInteraction::LoginFailed, this, &WebSocketClient::process_failed_login);
      channel->registerObject(QStringLiteral("clientInteraction"), clientGateway);
-     channel->connectTo(client);
+     channel->connectTo(m_client);
+     this->remoteIP = m_client->m_socket->peerAddress();
+     qDebug() << "Connection from" << this->remoteIP;
+}
+
+void WebSocketClient::process_failed_login()
+{
+    m_firewall->record_failed_login(this->remoteIP.toString());
 
 }

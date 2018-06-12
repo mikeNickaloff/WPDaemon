@@ -7,11 +7,13 @@
 #include "../src_wrappers/websocketclientwrapper.h"
 #include "../src_websocket/websockettransport.h"
 
+
 class WebSocketServer;
 class ClientInteraction;
 class LoginController;
 class WebSocketClient;
 class DatabaseController;
+class FirewallController;
 class WebSocketController : public QObject
 {
     Q_OBJECT
@@ -23,10 +25,14 @@ public:
     QHash<int, WebSocketClient*> clients;
     WebSocketClient* new_client;
     DatabaseController* m_db;
+    FirewallController* m_firewall;
+
+
 signals:
 
 public slots:
     void newClient(WebSocketTransport *client);
+
 };
 
 #endif // WEBSOCKETCONTROLLER_H

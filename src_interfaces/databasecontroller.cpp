@@ -9,6 +9,7 @@
 #include <QSqlError>
 #include <QSqlRecord>
 #include <QVector>
+#include <QCryptographicHash>
 DatabaseController::DatabaseController(QObject *parent, AssetUnpacker* i_unpacker) : QObject(parent), m_assets(i_unpacker)
 {
     this->load_database(qApp->applicationDirPath().append(QDir::separator()).append("database.db"));
@@ -20,6 +21,31 @@ DatabaseController::~DatabaseController()
     delete &db;
 }
 
+QString DatabaseController::toHex(QString plainText)
+{
+    QByteArray bytearray(plainText.toLocal8Bit());
+    QByteArray hexarray(bytearray.toHex());
+    QString rv = QString::fromLocal8Bit(hexarray);
+    return rv;
+}
+
+QString DatabaseController::fromHex(QString hexText)
+{
+    QByteArray hexarray(hexText.toLocal8Bit());
+    QByteArray plainarray(QByteArray::fromHex(hexarray));
+    QString rv = QString::fromLocal8Bit(plainarray);
+    return rv;
+}
+
+QString DatabaseController::sha512(QString plainText)
+{
+    QCryptographicHash hash(QCryptographicHash::Sha512);
+    QByteArray plainArray(plainText.toLocal8Bit());
+    QByteArray hashArray(QCryptographicHash::hash(plainArray, QCryptographicHash::Sha512));
+    QString rv(QString::fromLocal8Bit(hashArray));
+    return rv;
+}
+
 void DatabaseController::load_database(QString filepath)
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -28,7 +54,8 @@ void DatabaseController::load_database(QString filepath)
     if (ok) {
         if (!db.tables().contains("USERS")) {
             db.exec("CREATE table USERS (ID int primary key, USERNAME text, PASSWORD text)");
-            db.exec("INSERT INTO USERS VALUES(1, 'ADMIN', 'DEFAULTPASSWORD')");
+            db.exec(QString("INSERT INTO USERS VALUES(1, '%1', '%2')").arg(toHex("ADMIN")).arg(toHex(sha512("DEFAULTPASSWORD"))));
+
         }
         if (!db.tables().contains("ASSIGNMENTS")) {
             db.exec("CREATE table ASSIGNMENTS (ID int primary key, UID int, PERMISSION int, ASSIGNED int )");

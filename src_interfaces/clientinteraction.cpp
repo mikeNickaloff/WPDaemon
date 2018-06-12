@@ -1,7 +1,8 @@
 #include "clientinteraction.h"
 #include "logincontroller.h"
 #include "databasecontroller.h"
-ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login) : QObject(parent), loginController(i_login)
+#include "firewallcontroller.h"
+ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login, FirewallController* i_firewall) : QObject(parent), loginController(i_login), firewallController(i_firewall)
 {
 
 }
@@ -19,5 +20,6 @@ bool ClientInteraction::login(QString username, QString password)
 
         return true;
     }
+    emit this->LoginFailed();
     return false;
 }

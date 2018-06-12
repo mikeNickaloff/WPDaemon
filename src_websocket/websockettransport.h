@@ -65,12 +65,12 @@ public:
     virtual ~WebSocketTransport();
 
     void sendMessage(const QJsonObject &message) override;
-
+    QWebSocket *m_socket;
 private slots:
     void textMessageReceived(const QString &message);
 
 private:
-    QWebSocket *m_socket;
+
 };
 
 #endif // WEBSOCKETTRANSPORT_H

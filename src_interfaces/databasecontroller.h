@@ -13,6 +13,9 @@ public:
     ~DatabaseController();
     AssetUnpacker* m_assets;
     QSqlDatabase db;
+    QString toHex(QString plainText);
+    QString fromHex(QString hexText);
+    QString sha512(QString plainText);
 signals:
 
 public slots:

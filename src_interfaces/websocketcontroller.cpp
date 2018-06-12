@@ -7,6 +7,7 @@
 #include "../src_interfaces/clientinteraction.h"
 #include "../src_websocket/websocketclient.h"
 #include "../src_interfaces/databasecontroller.h"
+#include "../src_interfaces/firewallcontroller.h"
 #include <QtCore/QFile>
 #include <QtNetwork/QSslCertificate>
 #include <QtNetwork/QSslKey>
@@ -48,7 +49,7 @@ QFile keyFile(QStringLiteral(":/localhost.key"));
     QObject::connect(clientWrapper, &WebSocketClientWrapper::clientConnected,
                      this, &WebSocketController::newClient);
 
-
+    m_firewall = new FirewallController(this, this->m_db);
 
 }
 
