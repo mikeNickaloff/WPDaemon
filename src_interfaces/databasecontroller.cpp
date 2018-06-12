@@ -6,6 +6,9 @@
 #include <QSqlQuery>
 #include <QVariantList>
 #include <QtDebug>
+#include <QSqlError>
+#include <QSqlRecord>
+#include <QVector>
 DatabaseController::DatabaseController(QObject *parent, AssetUnpacker* i_unpacker) : QObject(parent), m_assets(i_unpacker)
 {
     this->load_database(qApp->applicationDirPath().append(QDir::separator()).append("database.db"));
@@ -24,20 +27,20 @@ void DatabaseController::load_database(QString filepath)
     bool ok = db.open();
     if (ok) {
         if (!db.tables().contains("USERS")) {
-            db.exec("CREATE table USERS (ID int primary key auto_increment, USERNAME text, PASSWORD text)");
+            db.exec("CREATE table USERS (ID int primary key, USERNAME text, PASSWORD text)");
             db.exec("INSERT INTO USERS VALUES(1, 'ADMIN', 'DEFAULTPASSWORD')");
         }
-        if (!db.tables().contains("PERMISSIONASSIGNMENTS")) {
-            db.exec("CREATE table PERMISSIONSASSIGNMENTS (ID int primary key auto_increment, UID int, PERMISSION int, ASSIGNED int )");
+        if (!db.tables().contains("ASSIGNMENTS")) {
+            db.exec("CREATE table ASSIGNMENTS (ID int primary key, UID int, PERMISSION int, ASSIGNED int )");
 
 
 
         }
-        if (!db.tables().contains("AVAILABLEPERMISSIONS")) {
-            db.exec("CREATE table AVAILABLEPERMISSIONS (ID int primary key,  PERMISSION int, NAME text, DESCRIPTION text, ENABLED int)");
+        if (!db.tables().contains("PERMSTATES")) {
+            db.exec("CREATE table PERMSTATES (ID int primary key,  PERMISSION int, NAME text, DESCRIPTION text, ENABLED int)");
             db.transaction();
             QSqlQuery q;
-            q.prepare("INSERT INTO AVAILABLEPERMISSIONS VALUES(?, ?, ?, ?, ?)");
+            q.prepare("INSERT INTO PERMSTATES VALUES(?, ?, ?, ?, ?)");
             QVariantList ids;
 
 
@@ -129,17 +132,47 @@ void DatabaseController::load_database(QString filepath)
 
             q.addBindValue(descriptions);
             q.addBindValue(enabledList);
-            q.execBatch();
+            if (!q.execBatch())
+                  qDebug() << q.lastError();
 
             QSqlQuery q2;
-            q2.prepare("INSERT INTO PERMISSIONASSIGNMENTS VALUES(?, 1, ?, 1)");
+            q2.prepare("INSERT INTO ASSIGNMENTS VALUES(?, 1, ?, 1)");
             q2.addBindValue(ids);
             q2.addBindValue(ids);
-            q2.execBatch();
+            if (!q2.execBatch())
+                  qDebug() << q2.lastError();
             db.commit();
             qDebug() << "Setting up permissions..";
 
         }
     }
+  qDebug() <<  executeQuery("PERMSTATES", (QStringList() << "NAME" << "DESCRIPTION"), QString(""));
+}
+
+QVector< QVector<QString> > DatabaseController::executeQuery(QString table, QStringList columns, QString extraParameters)
+{
+    QSqlQuery q;
+QVector< QVector<QString> > rv;
+    q.exec(QString("select %1 from %2 %3").arg(columns.join(",")).arg(table).arg(extraParameters));
+    qDebug() << "Running query" <<QString("select %1 from %2 %3;").arg(columns.join(",")).arg(table).arg(extraParameters);
+    if (q.isValid()) {
+        QVector<QString> nv;
+        for (int i=0; i<columns.count(); i++) {
+            nv << q.value(i).toString();
+        }
+        rv.append(nv);
+    }
+    while (q.next()) {
+        QVector<QString> nv;
+        for (int i=0; i<columns.count(); i++) {
+            nv << q.value(i).toString();
+        }
+        rv.append(nv);
+
+        //q.next();
+    }
+    qDebug() << rv;
+
+    return rv;
 }
 

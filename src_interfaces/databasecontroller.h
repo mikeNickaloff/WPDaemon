@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSqlDatabase>
+#include <QVector>
 class AssetUnpacker;
 class DatabaseController : public QObject
 {
@@ -16,6 +17,9 @@ signals:
 
 public slots:
     void load_database(QString filepath);
+    QVector<QVector<QString> > executeQuery(QString table, QStringList columns, QString extraParameters);
+
+
 };
 
 #endif // DATABASECONTROLLER_H

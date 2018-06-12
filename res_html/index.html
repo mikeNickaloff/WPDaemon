@@ -365,7 +365,7 @@ function w3_close() {
 	  <label><b>Username</b></label>
 	  <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="login" id="loginname" required>
 	  <label><b>Password</b></label>
-	  <input class="w3-input w3-border" type="text" placeholder="Enter Password" name="password" id="loginpassword" required>
+	  <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" id="loginpassword" required>
 	  <div style="text-align:center;padding:5px" id="loginError">
 	      Username already in use.
 	  </div>
@@ -378,7 +378,7 @@ function w3_close() {
 
       function submitForm(event) {
 	  console.log("DEBUG login: " + channel);
-	  console.log(channel.objects.clientInteraction.login($('#loginname').val(), "none", function(arg) {
+	  console.log(channel.objects.clientInteraction.login($('#loginname').val(), $('#loginpassword').val(), function(arg) {
 	      console.log("DEBUG login response: " + arg);
 	      if (arg === true) {
 		  $('#loginError').hide();

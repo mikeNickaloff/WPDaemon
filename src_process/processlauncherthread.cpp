@@ -27,7 +27,7 @@ QByteArray ProcessLauncherThread::run_internal_script(QString scriptFile, QStrin
         qDebug() << myProcess->state();
 
     }
-    if (!myProcess->waitForFinished(120000)) {
+    if (!myProcess->waitForFinished(-1)) {
         qDebug() << "Took too long";
     } else {
         //qDebug() << myProcess->readAll();

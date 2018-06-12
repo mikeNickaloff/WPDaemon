@@ -45,15 +45,10 @@ QFile keyFile(QStringLiteral(":/localhost.key"));
     // wrap WebSocket clients in QWebChannelAbstractTransport objects
     clientWrapper = new WebSocketClientWrapper(server);
 
-    // setup the channel
-    //  channel = new QWebChannel(this);
     QObject::connect(clientWrapper, &WebSocketClientWrapper::clientConnected,
                      this, &WebSocketController::newClient);
 
 
-    // setup the dialog and publish it to the QWebChannel
-    //    ClientInteraction* clientGateway = new ClientInteraction(this);
-    //    channel->registerObject(QStringLiteral("ClientInteraction"), clientGateway);
 
 }
 
