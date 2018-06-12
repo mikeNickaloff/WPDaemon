@@ -2,15 +2,41 @@
 #include "databasecontroller.h"
 #include <QDateTime>
 #include <QHostAddress>
+#include <QObject>
+#include <QtDebug>
 FirewallController::FirewallController(QObject *parent, DatabaseController *i_db) : QObject(parent), m_db(i_db)
 {
+    // frequency between logins
+    FAILED_LOGIN_INTERVAL = 300;
+
+    // number of failed logins occuring within
+    // frequency
+    FAILED_LOGIN_COUNT = 3;
+
+    // how long to block the IP address (in seconds)
+    //  when exceeding  FAILED_LOGIN_COUNT within
+    //  FAILED_LOGIN_INTERVAL seconds
+    //
+    FAILED_LOGIN_BAN_TIME = 10800;
+
+
 
 }
 
 bool FirewallController::isBanned(QString remoteIP)
 {
-
-    if (ban_list.keys().contains(remoteIP)) {
+    qint64 ntime = QDateTime::currentSecsSinceEpoch();
+     if (m_bans.keys().contains(remoteIP)) {
+         if (m_bans[remoteIP] > ntime) {
+           return true;
+         } else {
+           m_bans.remove(remoteIP);
+           return false;
+         }
+     } else {
+       return false;
+     }
+  /*  if (ban_list.keys().contains(remoteIP)) {
         QDateTime time = ban_list.value(remoteIP);
         if (time.secsTo(QDateTime::currentDateTime()) < 0) {
             ban_list.remove(remoteIP);
@@ -18,7 +44,7 @@ bool FirewallController::isBanned(QString remoteIP)
         } else {
             return true;
         }
-    }
+    } */
     return false;
 
 }
@@ -26,27 +52,32 @@ bool FirewallController::isBanned(QString remoteIP)
 void FirewallController::record_failed_login(QString remoteIP)
 {
     qDebug() << "Failed Login from " << remoteIP;
-    // need to fix this code and
-    // related members due to seg fault somewhere
-    //  (or some other error)  causes abort :/
-    // ... might be a typo or something.
-    // or the #DEFINE values
+    int i = 0;
+    while ((m_hosts.keys().contains(i)) || (m_hosts.value(i) == remoteIP)) {
+        i++;
+    }
+    int hostId = i;
+    qint64 ntime;
+    ntime = QDateTime::currentSecsSinceEpoch();
+    if (!m_hosts.values().contains(remoteIP)) {
+         m_hosts[hostId] = remoteIP;
+         m_fails[hostId] = 0;
+         m_times[hostId] = ntime;
 
-    /*if (this->last_failed_login.keys().contains(remoteIP)) {
-        QDateTime lastFail =  this->last_failed_login.value(remoteIP);
-        if ((int)lastFail.secsTo(QDateTime::currentDateTime()) < (int)FAILED_LOGIN_INTERVAL) {
-            this->last_failed_login[remoteIP] = QDateTime::currentDateTime();
-            this->failed_login_count[remoteIP] = this->failed_login_count.value(remoteIP,1) + 1;
-            if (this->failed_login_count.value(remoteIP) > (int)FAILED_LOGIN_COUNT) {
-                this->ban_list[remoteIP] = QDateTime::currentDateTime().addSecs(FAILED_LOGIN_BAN_TIME);
-                qDebug() << remoteIP << "has been banned until" << ban_list.value(remoteIP);
-            }
-        } else {
-            this->last_failed_login[remoteIP] = QDateTime::currentDateTime();
-            this->failed_login_count[remoteIP] = 1;
-        }
-    } else {
-        this->last_failed_login[remoteIP] = QDateTime::currentDateTime();
-        this->failed_login_count[remoteIP] = 1;
-    } */
+         qDebug() << "Added new Host Entry" << remoteIP << 0 << ntime;
+
+    }
+    QDateTime lastTime = QDateTime::fromSecsSinceEpoch(m_times[hostId]);
+    QDateTime nTime = QDateTime::fromSecsSinceEpoch(ntime);
+    if (lastTime.secsTo(nTime) > FAILED_LOGIN_INTERVAL) {
+        m_fails[hostId] = 0;
+    }
+    m_fails[hostId]++;
+    m_times[hostId] = ntime;
+    int failCount = m_fails[hostId];
+    if (failCount > FAILED_LOGIN_COUNT) {
+        m_bans[remoteIP] = ntime + FAILED_LOGIN_BAN_TIME;
+        qDebug() << remoteIP << "has been banned";
+    }
+
 }

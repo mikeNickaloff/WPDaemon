@@ -12,13 +12,17 @@ ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login, 
 */
 bool ClientInteraction::login(QString username, QString password)
 {
-    if (loginController->loggedIn == false) {
-        if (loginController->check_login(username, password) == true) {
+    if (!firewallController->isBanned(this->remoteIP)) {
+
+
+        if (loginController->loggedIn == false) {
+            if (loginController->check_login(username, password) == true) {
+                return true;
+            }
+        } else {
+
             return true;
         }
-    } else {
-
-        return true;
     }
     emit this->LoginFailed();
     return false;

@@ -5,5 +5,7 @@
         <file>res_html/qwebchannel.js</file>
         <file>res_scripts/hello.sh</file>
         <file>res_scripts/start_https.sh</file>
+        <file>res_html/core.js</file>
+        <file>res_html/sockets.js</file>
     </qresource>
 </RCC>

@@ -15,6 +15,7 @@ public:
     LoginController* loginController;
     FirewallController* firewallController;
     Q_INVOKABLE bool login(QString username, QString password);
+    QString remoteIP;
 signals:
     void requireLogin();
     void LoginSuccessful();

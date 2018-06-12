@@ -55,5 +55,5 @@ QFile keyFile(QStringLiteral(":/localhost.key"));
 
 void WebSocketController::newClient(WebSocketTransport *client)
 {
-    new_client = new  WebSocketClient(this, client, m_db);
+    new_client = new  WebSocketClient(this, client, m_db, this->m_firewall);
 }
