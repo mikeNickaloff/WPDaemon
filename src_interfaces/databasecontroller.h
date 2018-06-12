@@ -17,7 +17,7 @@ signals:
 
 public slots:
     void load_database(QString filepath);
-    QVector<QVector<QString> > executeQuery(QString table, QStringList columns, QString extraParameters);
+    QVector<QVector<QString> > executeSelectQuery(QString table, QStringList columns, QString extraParameters);
 
 
 };

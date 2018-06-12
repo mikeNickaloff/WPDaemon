@@ -14,6 +14,12 @@ public:
     DatabaseController* m_db;
     bool check_login(QString username, QString password);
     bool loggedIn;
+
+    // assigned permissions
+    QHash<int, bool> assignments;
+    QHash<int, QString> assignment_descriptions;
+    int m_uid;
+    QString m_username;
 signals:
 
 public slots:
