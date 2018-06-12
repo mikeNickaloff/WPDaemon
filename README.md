@@ -55,7 +55,26 @@ the <b>WebSocketController</b> constructor.
 <hr>
 
 If you would like a complete list of available actions, visit
-<a href="https://developer.wordpress.org/cli/commands/">Commmands</a>  as WPDaemon's command structure is
-based on the one used in WP-CLI
+<a href="https://developer.wordpress.org/cli/commands/">https://developer.wordpress.org/cli/commands/</a>  
+WPDaemon's command structure is based on the command structure used by WP-CLI.  
+(In fact WPDaemon is really just a fancy front-end for WP-CLI -- but whose keeping track of these things?)
+
+The entire project is most like in blatent disregard for any and all License Agreements from third party software,,
+but the truth of the matter is... I don't really care.. If you really want to sue me over the $0.00 that I 
+will be undoubtedly making from this project, I  will be happy to pay the developers the entire sum of the profits 
+made from WPDaemon (which is open source).
+
+Feel free to clone, fork, modify, take credit for, or even duplicate / sell any part of this project as you see fit. 
+
+My main goal was really to make other expensive WP Management Suites obsolete, and to open the doors for the open source
+community to not have to update every site manually.  
+
+This will decrease the number of passwords that have to be stored and also decrease of the number of worthless "XXX-Child"
+plugins that are installed on everyone's wordpress which no-doubt are used for all sorts of nefarious purposes. 
+
+At the time of this document's creation  (6/12/2018)  this will be the only one of its kind in the realm of
+Wordpress Management Daemons, and by the time it is finished, it will likely be one of many. 
+
+- Mike
 
 Local Self-hosted Wordpress Admin Daemon That runs as an UNPRIVILEGED user and DOES NOT NEED any special plugins or login information.  Works right out of the box.
