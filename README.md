@@ -52,6 +52,10 @@ You will likely also have to make changes to the WebSocketController listen dire
 in SSLMode rather than in NonSecureMode. This can be changed via the  initialization of the 'server' object in
 the <b>WebSocketController</b> constructor.
 
+<hr>
 
+If you would like a complete list of available actions, visit
+<a href="https://developer.wordpress.org/cli/commands/">Commmands</a>  as WPDaemon's command structure is
+based on the one used in WP-CLI
 
 Local Self-hosted Wordpress Admin Daemon That runs as an UNPRIVILEGED user and DOES NOT NEED any special plugins or login information.  Works right out of the box.
