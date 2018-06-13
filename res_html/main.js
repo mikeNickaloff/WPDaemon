@@ -1,30 +1,38 @@
+// clang-format off
 $(document).ready(function () {
     $('#loginForm').submit(submitForm)
-
-    function submitForm(event) {
-        //console.log("DEBUG login: " + channel)
-        console.log(channel.objects.clientInteraction.login(
-                        $('#loginname').val(), $('#loginpassword').val(),
-                        function (arg) {
-                            //console.log("DEBUG login response: " + arg)
-                            if (arg === true) {
-                                $('#loginError').hide()
-                                document.getElementById(
-                                            'loginDialog').style.display = 'none'
-                                window.loggedin = true
-                                w3_open()
-                            } else {
-                                $('#LoginError').innerHTML(
-                                            "Invalid Username/Password")
-                                $('#loginError').show()
-                            }
-                        }))
-        //console.log($('#loginname').val())
-        if (event !== undefined)
-            event.preventDefault()
-        return false
-    }
 })
+
+function submitForm(event) {
+    //console.log("DEBUG login: " + channel)
+    channel.objects.clientInteraction.login($('#loginname').val(),
+                                            $('#loginpassword').val(),
+                                            function (arg) {
+                                                //console.log("DEBUG login response: " + arg)
+                                                if (arg === true) {
+                                                    $('#loginError').hide()
+                                                    document.getElementById(
+                                                                'loginDialog').style.display
+                                                            = 'none'
+                                                    window.loggedin = true
+                                                    var myObject
+                                                    channel.objects.clientInteraction.allowedSubmodules(
+                                                                function (arg) {
+                                                                    myObject = JSON.parse(arg)
+                                                                    w3.displayObject('submodule_selector', JSON.parse(arg))
+                                                                    w3.sortHTML('#submodule_selector', 'tr')
+                                                                })
+                                                } else {
+                                                    $('#LoginError').html(
+                                                                "Invalid Username/Password")
+                                                    $('#loginError').show()
+                                                }
+                                            })
+    //console.log($('#loginname').val())
+    if (event !== undefined)
+        event.preventDefault()
+    return false
+}
 $('#messageForm').submit(submitMessage)
 
 function submitMessage(event) {
@@ -59,4 +67,5 @@ function w3_close() {
 }
 
 function open_site_dashboard(i_site) {/* perform site dashboard load */
-}
+}// clang-format on
+

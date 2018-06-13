@@ -5,18 +5,19 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css" />
+    <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
     <!--<link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css" />
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css" /> -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <script src="jquery-1.9.1.js"></script>
     <!--<script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script> -->
     <script type="text/javascript" src="qwebchannel.js"></script>
     <script type="text/javascript" src="core.js"></script>
     <script type="text/javascript" src="sockets.js"></script>
+    <script type="text/javascript" src="main.js"></script>
     <style>
     html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </style>
@@ -143,9 +144,11 @@
 
   <div class="w3-panel">
     <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-third">
-	<h5>Regions</h5>
-	<img src="/w3images/region.jpg" style="width:100%" alt="Google Regional Map">
+      <div class="w3-twothird">
+	<h5>Modules</h5>
+	<table class="w3-table w3-striped w3-white" id="submodule_selector" >
+	<tr w3-repeat="submodules" class=""><td><a href="javascript: console.log('activate submodule {{name}}')" class="w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
+      </table>
       </div>
       <div class="w3-twothird">
 	<h5>Feeds</h5>

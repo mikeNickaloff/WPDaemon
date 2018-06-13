@@ -19,6 +19,8 @@ window.onload = function () {
             channel.objects.clientInteraction.requireLogin.connect(function () {
                 $('#loginDialog').show()
             })
+            var loginDialog = document.querySelector("#loginDialog")
+            loginDialog.style.display = 'block'
         })
     }
 }

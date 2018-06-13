@@ -2,7 +2,8 @@
 #define CLIENTINTERACTION_H
 
 #include <QObject>
-
+#include <QVariant>
+#include <QJsonDocument>
 class LoginController;
 class DatabaseController;
 class FirewallController;
@@ -16,6 +17,7 @@ public:
     FirewallController* firewallController;
     Q_INVOKABLE bool login(QString username, QString password);
     QString remoteIP;
+    Q_INVOKABLE QVariant allowedSubmodules();
 signals:
     void requireLogin();
     void LoginSuccessful();

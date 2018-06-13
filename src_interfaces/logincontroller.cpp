@@ -25,17 +25,18 @@ bool LoginController::check_login(QString username, QString password)
         // it wastes about 2kb of total memory to store and is only requested
         // once on login so i think its okay to keep
 
-        QVector<QVector<QString> > rv(m_db->executeSelectQuery("USERS", (QStringList() << "USERS.ID" << "USERNAME" << "ASSIGNMENTS.PERMISSION" << "ASSIGNMENTS.ASSIGNED" << "PERMSTATES.DESCRIPTION"), "inner join ASSIGNMENTS ON UID=USERS.ID inner join PERMSTATES on ASSIGNMENTS.PERMISSION=PERMSTATES.PERMISSION"));
+        QVector<QVector<QString> > rv(m_db->executeSelectQuery("USERS", (QStringList() << "USERS.ID" << "USERNAME" << "ASSIGNMENTS.PERMISSION" << "ASSIGNMENTS.ASSIGNED" << "PERMSTATES.DESCRIPTION" << "PERMSTATES.NAME"), "inner join ASSIGNMENTS ON UID=USERS.ID inner join PERMSTATES on ASSIGNMENTS.PERMISSION=PERMSTATES.PERMISSION"));
        QVectorIterator<QVector<QString > > i(rv);
        while (i.hasNext()) {
            QVector<QString> rowData(i.next());
            this->assignments[rowData.at(2).toInt()] = static_cast<bool>(rowData.at(3).toInt());
+           this->assignment_names[rowData.at(2).toInt()] = rowData.at(5);
            this->assignment_descriptions[rowData.at(2).toInt()] = rowData.at(4);
            this->m_uid = rowData.at(0).toInt();
            this->m_username = m_db->fromHex(rowData.at(1));
        }
        //end of permission assignment population
-
+       qDebug() << "Successful Login";
         return true;
     }
     loggedIn = false;

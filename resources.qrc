@@ -8,5 +8,9 @@
         <file>res_html/core.js</file>
         <file>res_html/sockets.js</file>
         <file>res_html/main.js</file>
+        <file>res_html/font-awesome.min.css</file>
+        <file>res_html/jquery-1.9.1.js</file>
+        <file>res_html/jquery.mobile-1.4.2.css</file>
+        <file>res_html/w3.css</file>
     </qresource>
 </RCC>

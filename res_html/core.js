@@ -327,7 +327,8 @@ w3.getElementsByAttribute = function (x, att) {
 }
 w3.dataObject = {
 
-}w3.displayObject = function (id, data) {
+}
+w3.displayObject = function (id, data) {
     var htmlObj, htmlTemplate, html, arr = [], a, l, rowClone, x, j, i, ii, cc, repeat, repeatObj, repeatX = ""
     htmlObj = document.getElementById(id)
     htmlTemplate = init_template(id, htmlObj)

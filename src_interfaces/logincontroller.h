@@ -17,6 +17,7 @@ public:
 
     // assigned permissions
     QHash<int, bool> assignments;
+    QHash<int, QString> assignment_names;
     QHash<int, QString> assignment_descriptions;
     int m_uid;
     QString m_username;

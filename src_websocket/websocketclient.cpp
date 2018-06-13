@@ -20,8 +20,11 @@ WebSocketClient::WebSocketClient(QObject *parent, WebSocketTransport* i_client, 
      if (m_firewall->isBanned(remoteIP.toString())) {
          channel->disconnectFrom(m_client);
          m_client->m_socket->close(QWebSocketProtocol::CloseCodePolicyViolated, "Too many failed Logins - Temporary Ban In place");
+
      }
+     emit clientGateway->requireLogin();
      qDebug() << "Connection from" << this->remoteIP;
+
 }
 
 void WebSocketClient::process_failed_login()
