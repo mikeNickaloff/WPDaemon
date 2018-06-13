@@ -315,36 +315,9 @@
   <!-- End page content -->
 </div>
 
-<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-	mySidebar.style.display = 'none';
-	overlayBg.style.display = "none";
-    } else {
-	mySidebar.style.display = 'block';
-	overlayBg.style.display = "block";
-    }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
 
 
 
-<!--<div class="w3-container">
-  <h2>W3.CSS Login Modal</h2>
--->
   <button onclick="document.getElementById('loginDialog').style.display='block'" class="w3-button w3-green w3-large">Login</button>
 
   <div id="loginDialog" class="w3-modal">
@@ -362,33 +335,12 @@ function w3_close() {
 	  <label><b>Password</b></label>
 	  <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" id="loginpassword" required>
 	  <div style="text-align:center;padding:5px" id="loginError">
-	      Username already in use.
+
 	  </div>
 <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
 	  <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
 	</div>
       </form>
-      <script>
-      $('#loginForm').submit(submitForm);
-
-      function submitForm(event) {
-	  console.log("DEBUG login: " + channel);
-	  console.log(channel.objects.clientInteraction.login($('#loginname').val(), $('#loginpassword').val(), function(arg) {
-	      console.log("DEBUG login response: " + arg);
-	      if (arg === true) {
-		  $('#loginError').hide();
-		  document.getElementById('loginDialog').style.display='none';
-		  window.loggedin = true;
-	      } else {
-		  $('#loginError').show();
-	      }
-	  }));
-	  console.log($('#loginname').val());
-	  if (event !== undefined)
-	      event.preventDefault();
-	  return false;
-      }
-      </script>
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
 	<button onclick="document.getElementById('loginDialog').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
 	<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
@@ -396,76 +348,10 @@ function w3_close() {
 
     </div>
   </div>
-<!--</div>-->
 
 
-<!--<div id="loginDialog" class="easyui-dialog" title="Chat Login" data-options="iconCls:'icon-save'" style="width:400px;height:200px;padding:10px">
-    <form id="loginForm" method="post">
-        <table cellpadding="5">
-        <tr><td>Name:</td><td><input class="easyui-validatebox" type="text" id="loginname" name="name" data-options="required:true"></input></td></tr>
-        </table>
-    </form>
-    <div style="text-align:center;padding:5px">
-        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Login</a>
-    </div>
-    <div style="text-align:center;padding:5px" id="loginError">
-        Username already in use.
-    </div>
-    <script>
-    $('#loginForm').submit(submitForm);
-
-    function submitForm(event) {
-        console.log("DEBUG login: " + channel);
-	console.log(channel.objects.clientInteraction.login($('#loginname').val(), "none", function(arg) {
-            console.log("DEBUG login response: " + arg);
-            if (arg === true) {
-                $('#loginError').hide();
-                $('#loginDialog').dialog('close');
-                window.loggedin = true;
-            } else {
-                $('#loginError').show();
-            }
-        }));
-        console.log($('#loginname').val());
-        if (event !== undefined)
-            event.preventDefault();
-        return false;
-    }
-    </script>
-</div>
 
 
-<div class="easyui-layout" style="width:500px;height:300px;">
-    <div data-options="region:'east',split:true" title="Users" id="userlist" style="width:100px;">
-
-    </div>
-    <div data-options="region:'south',split:true" style="height:50px;">
-        <form id="messageForm">
-            <input class="easyui-validatebox" type="text" id="message" name="name" style="width: 97%"></input>
-        </form>
-    </div>
-    <div data-options="region:'center'" id="chat">
-
-    </div>
-    <script>
-    $('#messageForm').submit(submitMessage);
-
-    function submitMessage(event) {
-        channel.objects.chatserver.sendMessage($('#loginname').val(), $('#message').val());
-        $('#message').val('');
-        if (event !== undefined)
-            event.preventDefault();
-        return false;
-    }
-    </script>
-</div>
-
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#loginError').hide();
-});
-</script>
 
 </body>
 </html>

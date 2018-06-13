@@ -7,5 +7,6 @@
         <file>res_scripts/start_https.sh</file>
         <file>res_html/core.js</file>
         <file>res_html/sockets.js</file>
+        <file>res_html/main.js</file>
     </qresource>
 </RCC>
