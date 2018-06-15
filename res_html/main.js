@@ -44,13 +44,13 @@ function submitMessage(event) {
     return false
 }
 
-var mySidebar = document.getElementById("mySidebar")
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay")
-
 // Toggle between showing and hiding the sidebar, and add overlay effect
 function w3_open() {
+    var mySidebar = document.getElementById("mySidebar")
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay")
+
     if (mySidebar.style.display === 'block') {
         mySidebar.style.display = 'none'
         overlayBg.style.display = "none"
@@ -66,6 +66,13 @@ function w3_close() {
     overlayBg.style.display = "none"
 }
 
-function open_site_dashboard(i_site) {/* perform site dashboard load */
-}// clang-format on
+function open_site_dashboard(i_site) {
+    channel.objects.clientInteraction.set_current_site(i_site, function(args) {
+        if (args === true) {
 
+        } else {
+            alert("Could not Access Site.\n Make sure the wp-config file is readable by the WPDaemon user.");
+        }
+    });
+    /* perform site dashboard load */
+} // clang-format on
