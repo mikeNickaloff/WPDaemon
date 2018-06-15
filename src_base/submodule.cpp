@@ -12,6 +12,14 @@ Submodule::Submodule(QObject *parent) : QObject(parent)
 {
 
 }
+// Synopsis Parser
+// [value]            (\[\S+\]\B)
+// <equired>          (\<\S+\>\B)
+// [--option=<value>] (\[\S+\=<\S+\>\]\B)
+
+
+//  to match all of a type in a row, add + to the end
+
 
 QVariant Submodule::get_command_dump(QString subproperty)
 {
