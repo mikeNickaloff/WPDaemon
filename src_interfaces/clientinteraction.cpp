@@ -2,6 +2,8 @@
 #include "logincontroller.h"
 #include "databasecontroller.h"
 #include "firewallcontroller.h"
+#include "../src_base/submodule.h"
+#include "../src_base/submodulecommand.h"
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -12,10 +14,7 @@ ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login, 
 {
 
 }
-/* TO DO
- * - SETUP LOGIN SYSTEM
- * - SETUP SIGNALS/SLOTS FOR HANDLING REQUESTS SECURELY
-*/
+
 bool ClientInteraction::login(QString username, QString password)
 {
     if (!firewallController->isBanned(this->remoteIP)) {
@@ -74,4 +73,42 @@ QVariant ClientInteraction::allowedSubmodules()
 
     return QVariant::fromValue(doc.toJson(QJsonDocument::Compact));
     }
+}
+
+QVariant ClientInteraction::set_current_submodule(QString i_module)
+{
+
+    if (loginController->assignment_id_names.keys().contains(i_module)) {
+        int tmpId = loginController->assignment_id_names[i_module];
+        if (loginController->assignments.keys().contains(tmpId)) {
+            if (this->loginController->assignments[tmpId] == true) {
+               currentSubmodule = new Submodule(this);
+               currentSubmodule->moduleName = i_module;
+               QString names = currentSubmodule->get_command_dump("name").toString();
+               QStringList nameList = names.split("\n", QString::SkipEmptyParts);
+               QString desc = currentSubmodule->get_command_dump("description").toString();
+               QStringList descList = desc.split("\n", QString::SkipEmptyParts);
+               QString rv = "{\"commands\":[";
+               for (int i=0; i<nameList.count(); i++) {
+                   if (descList.count() > i) {
+                       QString newStr = QString("{\"name\":%1,\"description\":%2}").arg(nameList.at(i)).arg(descList.at(i));
+                       if ((descList.count() - 1) != i) {
+                           newStr.append(",");
+                       }
+                       rv.append(newStr);
+                   }
+               }
+               rv.append("]}");
+               //qDebug() << arrList.count();
+
+
+               return QVariant::fromValue(rv);
+
+            }
+        }
+
+    } else {
+        return QVariant::fromValue(QString("{}"));
+    }
+    return QVariant::fromValue(QString("{}"));
 }

@@ -19,6 +19,7 @@ public:
     QHash<int, bool> assignments;
     QHash<int, QString> assignment_names;
     QHash<int, QString> assignment_descriptions;
+    QHash<QString, int> assignment_id_names;
     int m_uid;
     QString m_username;
 signals:

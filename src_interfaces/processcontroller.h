@@ -13,9 +13,9 @@ public:
     ProcessLauncherThread* newProcessLauncherThread;
     int spawn_internal_process(QString relativeFile, QStringList args);
 signals:
-
+    void outputFromProcess(int processThreadId, QString outputString);
 public slots:
-    void handleProcessOutput(QByteArray output);
+    void handleProcessOutput(int processThreadId, QByteArray output);
 };
 
 #endif // PROCESSCONTROLLER_H

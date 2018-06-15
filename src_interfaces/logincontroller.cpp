@@ -31,6 +31,7 @@ bool LoginController::check_login(QString username, QString password)
            QVector<QString> rowData(i.next());
            this->assignments[rowData.at(2).toInt()] = static_cast<bool>(rowData.at(3).toInt());
            this->assignment_names[rowData.at(2).toInt()] = rowData.at(5);
+           this->assignment_id_names[rowData.at(5)] = rowData.at(2).toInt();
            this->assignment_descriptions[rowData.at(2).toInt()] = rowData.at(4);
            this->m_uid = rowData.at(0).toInt();
            this->m_username = m_db->fromHex(rowData.at(1));

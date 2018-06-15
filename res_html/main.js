@@ -15,13 +15,7 @@ function submitForm(event) {
                                                                 'loginDialog').style.display
                                                             = 'none'
                                                     window.loggedin = true
-                                                    var myObject
-                                                    channel.objects.clientInteraction.allowedSubmodules(
-                                                                function (arg) {
-                                                                    myObject = JSON.parse(arg)
-                                                                    w3.displayObject('submodule_selector', JSON.parse(arg))
-                                                                    w3.sortHTML('#submodule_selector', 'tr')
-                                                                })
+                                                    display_all_submodules();
                                                 } else {
                                                     $('#LoginError').html(
                                                                 "Invalid Username/Password")
@@ -33,8 +27,28 @@ function submitForm(event) {
         event.preventDefault()
     return false
 }
+
 $('#messageForm').submit(submitMessage)
 
+function set_submodule(selectedSubmodule) {
+ channel.objects.clientInteraction.set_current_submodule(selectedSubmodule, function(args) {
+     myObject = JSON.parse(args);
+     w3.displayObject('command_selector', JSON.parse(args)) });
+    w3.hide("#submodule_selector");
+    w3.show("#command_selector");
+    document.getElementById("submodule_name").innerHTML = selectedSubmodule;
+}
+function display_all_submodules() {
+    var myObject
+    channel.objects.clientInteraction.allowedSubmodules(
+                function (arg) {
+                    myObject = JSON.parse(arg)
+                    w3.displayObject('submodule_selector', JSON.parse(arg))
+                    w3.sortHTML('#submodule_selector', 'tr')
+                    w3.show("#submodule_selector");
+                    w3.hide("#command_selector");
+                })
+}
 function submitMessage(event) {
     channel.objects.chatserver.sendMessage($('#loginname').val(),
                                            $('#message').val())
@@ -62,6 +76,11 @@ function w3_open() {
 
 // Close the sidebar with the close button
 function w3_close() {
+    var mySidebar = document.getElementById("mySidebar")
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay")
+
     mySidebar.style.display = "none"
     overlayBg.style.display = "none"
 }

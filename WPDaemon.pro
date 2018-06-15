@@ -29,7 +29,8 @@ SOURCES += main.cpp \
     src_assets/assetunpacker.cpp \
     src_websocket/websocketclient.cpp \
     src_interfaces/firewallcontroller.cpp \
-    src_base/submodule.cpp
+    src_base/submodule.cpp \
+    src_base/submodulecommand.cpp
 
 HEADERS += \
     src_interfaces/clicontroller.h \
@@ -45,7 +46,8 @@ HEADERS += \
     src_assets/assetunpacker.h \
     src_websocket/websocketclient.h \
     src_interfaces/firewallcontroller.h \
-    src_base/submodule.h
+    src_base/submodule.h \
+    src_base/submodulecommand.h
 
 RESOURCES += \
     resources.qrc

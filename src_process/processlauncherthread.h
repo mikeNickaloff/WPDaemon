@@ -22,8 +22,10 @@ public:
     QString processType;
     QString processFile;
     QStringList processArgs;
+
+    int processThreadId;
 signals:
-    void outputWritten(QByteArray output);
+    void outputWritten(int threadId, QByteArray output);
 public slots:
    QByteArray run_internal_script(QString scriptFile, QStringList scriptArgs);
    QByteArray run_external_script(QString scriptFile, QStringList scriptArgs);

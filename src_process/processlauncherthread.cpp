@@ -68,5 +68,5 @@ void ProcessLauncherThread::run()
     if (processType == "internal") {  output = run_internal_script(processFile, processArgs); }
     if (processType == "external") {  output = run_external_script(processFile, processArgs); }
 
-    emit outputWritten(output);
+    emit outputWritten(this->processThreadId, output);
 }

@@ -12,5 +12,9 @@
         <file>res_html/jquery-1.9.1.js</file>
         <file>res_html/jquery.mobile-1.4.2.css</file>
         <file>res_html/w3.css</file>
+        <file>res_scripts/commands.txt</file>
+        <file>res_scripts/wp</file>
+        <file>res_scripts/jq</file>
+        <file>res_scripts/get_submodule_commands.sh</file>
     </qresource>
 </RCC>
