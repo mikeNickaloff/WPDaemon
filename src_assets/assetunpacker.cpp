@@ -23,7 +23,8 @@ QString AssetUnpacker::appDirectory(QString subdirectory)
 void AssetUnpacker::unpack(QString resourceDir, QString targetDir)
 {
     QDir dir(QString(":/%1").arg(resourceDir));
-    dir.mkpath(appDirectory(targetDir));
+    QDir tgt(appDirectory(""));
+    bool ok = tgt.mkpath(appDirectory(targetDir));
     QFileInfoList list = dir.entryInfoList();
          std::cout << "     Bytes Filename" << std::endl;
          for (int i = 0; i < list.size(); ++i) {

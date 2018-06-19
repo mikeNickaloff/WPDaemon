@@ -24,7 +24,7 @@ WebSocketController::WebSocketController(QObject *parent, DatabaseController* i_
 QFile keyFile(QStringLiteral(":/localhost.key"));
 
 */
-    QFile certFile(qApp->applicationDirPath().append(QDir::separator()).append(QStringLiteral("fullchain.cert")));
+  /*  QFile certFile(qApp->applicationDirPath().append(QDir::separator()).append(QStringLiteral("fullchain.cert")));
     QFile keyFile(qApp->applicationDirPath().append(QDir::separator()).append(QStringLiteral("fullchain.key")));
     certFile.open(QIODevice::ReadOnly);
     keyFile.open(QIODevice::ReadOnly);
@@ -37,7 +37,7 @@ QFile keyFile(QStringLiteral(":/localhost.key"));
     sslConfiguration.setPrivateKey(sslKey);
     sslConfiguration.setProtocol(QSsl::TlsV1SslV3);
     server->setSslConfiguration(sslConfiguration);
-
+ */
     if (!server->listen(QHostAddress::LocalHost, 65300)) {
         qFatal("Failed to open web socket server.");
         //return 1;
