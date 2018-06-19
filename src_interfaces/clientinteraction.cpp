@@ -88,19 +88,27 @@ QVariant ClientInteraction::set_current_submodule(QString i_module)
                QStringList nameList = names.split("\n", QString::SkipEmptyParts);
                QString desc = currentSubmodule->get_command_dump("description").toString();
                QStringList descList = desc.split("\n", QString::SkipEmptyParts);
-               QString syn = currentSubmodule->get_command_dump("synopsis").toString();
-               QStringList synList = syn.split("\n", QString::SkipEmptyParts);
+               /*QString syn = currentSubmodule->get_command_dump("synopsis").toString();
+               QStringList synList = syn.split("\n", QString::KeepEmptyParts); */
+
                QString rv = "{\"commands\":[";
+               //if (synList.count() != descList.count()) { qDebug() << "Synopsis Size Mismatch"; } else {
 
                for (int i=0; i<nameList.count(); i++) {
                    if (descList.count() > i) {
                        QString newStr = QString("{\"name\":%1,\"description\":%2}").arg(nameList.at(i)).arg(descList.at(i));
                        if ((descList.count() - 1) != i) {
                            newStr.append(",");
-                       }
-                       rv.append(newStr);
+                           QString syn = this->currentSubmodule->get_synopsis("synopsis", i).toString();
+                          // if (synList.count() > i) {
+                               this->currentSubmodule->add_command(nameList.at(i), descList.at(i), syn);
+                         //  }
+
+
                    }
+                       rv.append(newStr);
                }
+            }
                rv.append("]}");
                //qDebug() << arrList.count();
 

@@ -144,16 +144,16 @@
 
   <div class="w3-panel">
     <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-twothird w3-animate-left" id="submodule-container">
+      <div class="w3-twothird" id="submodule-container">
 	<h5>Modules</h5>
-	<table class="w3-table w3-striped w3-white" id="submodule_selector" >
-	<tr w3-repeat="submodules" class=""><td><a href="javascript: set_submodule('{{name}}');" class="w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
+	<table class="w3-table w3-striped w3-white w3-animate-opacity" id="submodule_selector" >
+	<tr w3-repeat="submodules" class="w3-animate-left"><td><a href="javascript: set_submodule('{{name}}');" class="w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
       </table>
       </div>
       <div class="w3-twothird w3-animate-right" id="command-container">
 	<h5><a class="w3-button" href="javascript: display_all_submodules()" ><span id="submodule_name">Feeds</span></a></h5>
-	<table class="w3-table w3-striped w3-white" id="command_selector" >
-	<tr w3-repeat="commands" class=""><td><a href="javascript: set_command('{{name}}');" class="w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
+	<table class="w3-table w3-striped w3-white w3-animate-opacity" id="command_selector" >
+	<tr w3-repeat="commands" class="w3-animate-right"><td><a href="javascript: set_command('{{name}}');" class="w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
       </table>
       </div>
     </div>
