@@ -13,6 +13,7 @@ public:
     bool isLong;
     bool hasDefaultValue;
     bool isVarArg;
+    bool isSwitch;
     QString m_string;
     QStringList find_captures(QString regexString);
 signals:

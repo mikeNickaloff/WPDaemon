@@ -10,7 +10,7 @@ while read LINE; do
 done < ./tmp.txt
 if [ ! -f "./tmp2.txt" ]; then
     echo \"No Parameters\" > ./tmp2.txt
-    echo \"No Parameters\"\n
+    echo \"No Parameters\"
 fi
 rm ./tmp.txt
 rm ./tmp2.txt

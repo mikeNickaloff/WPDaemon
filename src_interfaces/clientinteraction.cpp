@@ -4,6 +4,7 @@
 #include "firewallcontroller.h"
 #include "../src_base/submodule.h"
 #include "../src_base/submodulecommand.h"
+#include "../src_base/commandparameter.h"
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -122,4 +123,64 @@ QVariant ClientInteraction::set_current_submodule(QString i_module)
         return QVariant::fromValue(QString("{}"));
     }
     return QVariant::fromValue(QString("{}"));
+}
+
+QVariant ClientInteraction::set_current_command(QString i_command)
+{
+    if (this->currentSubmodule != nullptr) {
+        int opResult = currentSubmodule->set_current_command(i_command);
+        qDebug() << "operation result" << opResult;
+        if (opResult != -1) {
+            // command exists as part of current submodule
+            QString rv = "{\"parameters\":[";
+            this->currentSubmodule->currentCommand->init_parameters();
+
+            for (int i=0; i<this->currentSubmodule->currentCommand->parameters.values().count(); i++) {
+                CommandParameter* param = this->currentSubmodule->currentCommand->parameters[i];
+                QString paramType = "none";
+                if (param->isRequired == true) {
+                    paramType = "required";
+                }
+                if (param->isOptional == true) {
+                    paramType = "required";
+                }
+                if (param->isSwitch == true) {
+                    paramType = "switch";
+                }
+                if (param->isLong == true) {
+                    paramType = "long";
+                }
+                param->m_string.remove("&");
+                param->m_string.remove(">");
+                param->m_string.remove("<");
+                param->m_string.remove("\"");
+                param->m_string.remove("[");
+                param->m_string.remove("]");
+                param->m_string.remove("\\n");
+                param->m_string.remove(QChar(QChar::LineFeed));
+                param->m_string.remove(QChar(QChar::CarriageReturn));
+
+                QString newStr = QString("{\"name\":\"%1\",\"type\":\"%2\"}").arg(param->m_string).arg(paramType);
+                rv.append(newStr);
+
+                if (i < (this->currentSubmodule->currentCommand->parameters.values().count() - 1)) {
+                  rv.append(",");
+                }
+            }
+              rv.append("]}");
+              qDebug() << rv;
+            return QVariant::fromValue(rv);
+        } else {
+          // command doesnt exist.
+            qDebug() << "No such command";
+             return QVariant::fromValue(QString("{}"));
+        }
+
+
+    } else {
+        qDebug() << "No submodule selected";
+        // current submodule not selected.
+        //  return empty array
+         return QVariant::fromValue(QString("{}"));
+    }
 }

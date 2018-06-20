@@ -156,6 +156,13 @@
 	<tr w3-repeat="commands" class="w3-animate-right"><td><a href="javascript: set_command('{{name}}');" class="w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
       </table>
       </div>
+
+<div class="w3-twothird w3-animate-right" id="parameter-container">
+  <h5><a class="w3-button" href="javascript: display_all_commands()" ><span id="command_name">Feeds</span></a></h5>
+  <table class="w3-table w3-striped w3-white w3-animate-opacity" id="parameter_selector" >
+  <tr w3-repeat="parameters" class="w3-animate-right"><td><a href="javascript: set_command('{{name}}');" class="w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{name}}</a></td><td><input type='text' name='{{name}}' /></td></tr>
+</table>
+</div>
     </div>
   </div>
   <hr>

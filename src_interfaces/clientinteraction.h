@@ -9,6 +9,7 @@ class DatabaseController;
 class FirewallController;
 class Submodule;
 class SubmoduleCommand;
+class CommandParameter;
 /* this is the controller that clients will talk to via webchannel */
 class ClientInteraction : public QObject
 {
@@ -21,6 +22,7 @@ public:
     QString remoteIP;
     Q_INVOKABLE QVariant allowedSubmodules();
     Q_INVOKABLE QVariant set_current_submodule(QString i_module);
+    Q_INVOKABLE QVariant set_current_command(QString i_command);
     Submodule* currentSubmodule;
 signals:
     void requireLogin();

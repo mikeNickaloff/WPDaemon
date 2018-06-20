@@ -19,9 +19,12 @@ public:
     ProcessLauncherThread* processLauncher;
     SubmoduleCommand* new_command;
     QVariant get_synopsis(QString subproperty, int subcommand_index);
+    int set_current_command(QString cmd_name);
+    SubmoduleCommand* currentCommand;
 signals:
 
 public slots:
+
     void add_command(QString i_name, QString i_desc, QString i_synopsis);
 };
 

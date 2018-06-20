@@ -42,6 +42,24 @@ QVariant Submodule::get_synopsis(QString subproperty, int subcommand_index)
     return QVariant::fromValue(output);
 }
 
+int Submodule::set_current_command(QString cmd_name)
+{
+    QHash<int, SubmoduleCommand*>::const_iterator i = this->commands.constBegin();
+    qDebug() << "Checking for" << cmd_name << "in" << commands.values();
+    while (i != this->commands.constEnd()) {
+        SubmoduleCommand* tmp_cmd = i.value();
+        if (tmp_cmd->name == cmd_name) {
+            this->currentCommand = tmp_cmd;
+            return i.key();
+        } else {
+         qDebug() << tmp_cmd->name << "does not match " << cmd_name;
+        }
+        i++;
+    }
+    this->currentCommand = nullptr;
+    return -1;
+}
+
 
 void Submodule::add_command(QString i_name, QString i_desc, QString i_synopsis)
 {
@@ -49,6 +67,8 @@ void Submodule::add_command(QString i_name, QString i_desc, QString i_synopsis)
     while (commands.keys().contains(newIdx)) { newIdx++; }
 
     new_command = new SubmoduleCommand(this, i_name, i_desc, i_synopsis);
+    new_command->name.remove(0, 1);
+    new_command->name.chop(1);
     commands[newIdx] = new_command;
 
 

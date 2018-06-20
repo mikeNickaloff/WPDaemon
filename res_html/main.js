@@ -55,6 +55,10 @@ function display_all_submodules() {
 
                 })
 }
+function display_all_commands() {
+    w3.hide("#parameter_selector");
+    w3.show("#command_selector");
+}
 function submitMessage(event) {
     channel.objects.chatserver.sendMessage($('#loginname').val(),
                                            $('#message').val())
@@ -97,9 +101,9 @@ function set_command(i_command) {
      myObject = JSON.parse(args);
 
 
-    w3.show("#param_selector");
-     w3.displayObject('param_selector', JSON.parse(args)) });
-    document.getElementById("command_name").innerHTML = selectedSubmodule;
+    w3.show("#parameter_selector");
+     w3.displayObject('parameter_selector', JSON.parse(args)) });
+    document.getElementById("command_name").innerHTML = i_command;
 }
 
 function open_site_dashboard(i_site) {
