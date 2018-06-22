@@ -37,7 +37,7 @@ bool LoginController::check_login(QString username, QString password)
            this->m_username = m_db->fromHex(rowData.at(1));
        }
        //end of permission assignment population
-       qDebug() << "Successful Login";
+        // qDebug() << "Successful Login";
         return true;
     }
     loggedIn = false;

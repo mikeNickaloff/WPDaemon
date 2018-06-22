@@ -58,7 +58,7 @@ QVariant ClientInteraction::allowedSubmodules()
                 hash["description"] = loginController->assignment_descriptions[assignmentId];
                 QJsonObject obj = QJsonObject::fromVariantHash(hash);
                 rv.append(obj);
-               // qDebug() << obj << rv;
+               //  // qDebug() << obj << rv;
             }
         }
 
@@ -93,7 +93,7 @@ QVariant ClientInteraction::set_current_submodule(QString i_module)
                QStringList synList = syn.split("\n", QString::KeepEmptyParts); */
 
                QString rv = "{\"commands\":[";
-               //if (synList.count() != descList.count()) { qDebug() << "Synopsis Size Mismatch"; } else {
+               //if (synList.count() != descList.count()) {  // qDebug() << "Synopsis Size Mismatch"; } else {
 
                for (int i=0; i<nameList.count(); i++) {
                    if (descList.count() > i) {
@@ -111,7 +111,7 @@ QVariant ClientInteraction::set_current_submodule(QString i_module)
                }
             }
                rv.append("]}");
-               //qDebug() << arrList.count();
+               // // qDebug() << arrList.count();
 
 
                return QVariant::fromValue(rv);
@@ -129,7 +129,7 @@ QVariant ClientInteraction::set_current_command(QString i_command)
 {
     if (this->currentSubmodule != nullptr) {
         int opResult = currentSubmodule->set_current_command(i_command);
-        qDebug() << "operation result" << opResult;
+     //    // qDebug() << "operation result" << opResult;
         if (opResult != -1) {
             // command exists as part of current submodule
             QString rv = "{\"parameters\":[";
@@ -142,7 +142,7 @@ QVariant ClientInteraction::set_current_command(QString i_command)
                     paramType = "required";
                 }
                 if (param->isOptional == true) {
-                    paramType = "required";
+                    paramType = "optional";
                 }
                 if (param->isSwitch == true) {
                     paramType = "switch";
@@ -160,7 +160,7 @@ QVariant ClientInteraction::set_current_command(QString i_command)
                 param->m_string.remove(QChar(QChar::LineFeed));
                 param->m_string.remove(QChar(QChar::CarriageReturn));
 
-                QString newStr = QString("{\"name\":\"%1\",\"type\":\"%2\"}").arg(param->m_string).arg(paramType);
+                QString newStr = QString("{\"name\":\"%1\",\"type\":\"%2\",\"html\":\"%3\"}").arg(param->m_string).arg(paramType).arg(param->html());
                 rv.append(newStr);
 
                 if (i < (this->currentSubmodule->currentCommand->parameters.values().count() - 1)) {
@@ -168,17 +168,17 @@ QVariant ClientInteraction::set_current_command(QString i_command)
                 }
             }
               rv.append("]}");
-              qDebug() << rv;
+               // qDebug() << rv;
             return QVariant::fromValue(rv);
         } else {
           // command doesnt exist.
-            qDebug() << "No such command";
-             return QVariant::fromValue(QString("{}"));
+             // qDebug() << "No such command";
+             return QVariant::fromValue(QString("{\"parameters\":[]}"));
         }
 
 
     } else {
-        qDebug() << "No submodule selected";
+         // qDebug() << "No submodule selected";
         // current submodule not selected.
         //  return empty array
          return QVariant::fromValue(QString("{}"));

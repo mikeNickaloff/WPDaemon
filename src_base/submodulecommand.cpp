@@ -11,11 +11,12 @@ void SubmoduleCommand::init_parameters()
     this->parameters.clear();
     QStringList synParams;
     synParams << this->synopsis.split(" ",  QString::SkipEmptyParts);
-    qDebug() << synParams;
+     // qDebug() << synParams;
     for (int i=0; i<synParams.count(); i++) {
         QString tmp_str = synParams.at(i);
         newParameter = new CommandParameter(this, tmp_str);
         //newParameter->parse();
+        newParameter->parameterIndex = i;
         this->parameters[i] = newParameter;
     }
 }

@@ -160,20 +160,20 @@ void DatabaseController::load_database(QString filepath)
             q.addBindValue(descriptions);
             q.addBindValue(enabledList);
             if (!q.execBatch())
-                qDebug() << q.lastError();
+                  qDebug() << q.lastError();
 
             QSqlQuery q2;
             q2.prepare("INSERT INTO ASSIGNMENTS VALUES(?, 1, ?, 1)");
             q2.addBindValue(ids);
             q2.addBindValue(ids);
             if (!q2.execBatch())
-                qDebug() << q2.lastError();
+                  qDebug() << q2.lastError();
             db.commit();
-            qDebug() << "Setting up permissions..";
+             // qDebug() << "Setting up permissions..";
 
         }
     }
-    //qDebug() <<  executeSelectQuery("PERMSTATES", (QStringList() << "NAME" << "DESCRIPTION"), QString(""));
+    // // qDebug() <<  executeSelectQuery("PERMSTATES", (QStringList() << "NAME" << "DESCRIPTION"), QString(""));
 }
 
 QVector< QVector<QString> > DatabaseController::executeSelectQuery(QString table, QStringList columns, QString extraParameters)
@@ -181,7 +181,7 @@ QVector< QVector<QString> > DatabaseController::executeSelectQuery(QString table
     QSqlQuery q;
     QVector< QVector<QString> > rv;
     q.exec(QString("select %1 from %2 %3").arg(columns.join(",")).arg(table).arg(extraParameters));
-    //qDebug() << "Running query" <<QString("select %1 from %2 %3;").arg(columns.join(",")).arg(table).arg(extraParameters);
+    // // qDebug() << "Running query" <<QString("select %1 from %2 %3;").arg(columns.join(",")).arg(table).arg(extraParameters);
 
     // here to ensure that the first record is captured
     // due to some invalid query results during alpha

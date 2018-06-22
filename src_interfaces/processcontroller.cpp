@@ -24,5 +24,5 @@ void ProcessController::handleProcessOutput(int processThreadId, QByteArray outp
 
     QString output_str = QString::fromLocal8Bit(output);
     emit this->outputFromProcess(processThreadId, output_str);
-    qDebug() << "Process Output:" << output;
+     // qDebug() << "Process Output:" << output;
 }

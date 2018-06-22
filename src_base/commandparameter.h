@@ -14,8 +14,11 @@ public:
     bool hasDefaultValue;
     bool isVarArg;
     bool isSwitch;
+    int parameterIndex;
     QString m_string;
     QStringList find_captures(QString regexString);
+
+    QString html();
 signals:
 
 public slots:

@@ -26,6 +26,20 @@ QStringList CommandParameter::find_captures(QString regexString)
     return list;
 }
 
+QString CommandParameter::html()
+{
+    QString rv;
+    if (isRequired) {
+        rv = QString("<input type='text' name='%1' class='w3-input w3-rest w3-border-red' required>").arg(parameterIndex);
+    }
+    if (isOptional) {
+        rv = QString("<input type='text' name='%1' class='w3-input w3-rest w3-border-blue'>").arg(parameterIndex);
+    }
+
+    return rv;
+
+}
+
 void CommandParameter::parse()
 {
     QStringList optionalFlags;
@@ -38,21 +52,21 @@ void CommandParameter::parse()
             QStringList optional;
             optional << this->find_captures("(\\[\\[^\\>\\<]+\\]\\B)");
             if (optional.count() == 0) {
-                qDebug() << "Switch" << m_string;
+                 // qDebug() << "Switch" << m_string;
                 isSwitch = true;
 
             } else {
-                qDebug() << "optional" << optional.first();
+                 // qDebug() << "optional" << optional.first();
                 isOptional = true;
                 m_string = optional.first();
             }
         } else {
-            qDebug() << "requiured" << required.first();
+             // qDebug() << "requiured" << required.first();
             isRequired = true;
             m_string = required.first();
         }
     } else {
-        qDebug() << "optional flag" << optionalFlags.first();
+         // qDebug() << "optional flag" << optionalFlags.first();
         m_string = optionalFlags.first();
         isLong = true;
     }

@@ -9,7 +9,11 @@ WPDaemon.depends = QtWebSocket
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
+MOC_DIR = ./build/.moc
+OBJECTS_DIR = ./build/.obj
+DESTDIR = ./
+TARGET = WPDaemon
+CONFIG += static
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -31,7 +35,9 @@ SOURCES += main.cpp \
     src_interfaces/firewallcontroller.cpp \
     src_base/submodule.cpp \
     src_base/submodulecommand.cpp \
-    src_base/commandparameter.cpp
+    src_base/commandparameter.cpp \
+    src_base/website.cpp \
+    src_interfaces/websitecontroller.cpp
 
 HEADERS += \
     src_interfaces/clicontroller.h \
@@ -49,7 +55,10 @@ HEADERS += \
     src_interfaces/firewallcontroller.h \
     src_base/submodule.h \
     src_base/submodulecommand.h \
-    src_base/commandparameter.h
+    src_base/commandparameter.h \
+    src_base/website.h \
+    src_interfaces/websitecontroller.h
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    binaries.qrc

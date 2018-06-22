@@ -51,7 +51,7 @@ bool FirewallController::isBanned(QString remoteIP)
 
 void FirewallController::record_failed_login(QString remoteIP)
 {
-    qDebug() << "Failed Login from " << remoteIP;
+     // qDebug() << "Failed Login from " << remoteIP;
     int i = 0;
     while ((m_hosts.keys().contains(i)) || (m_hosts.value(i) == remoteIP)) {
         i++;
@@ -64,7 +64,7 @@ void FirewallController::record_failed_login(QString remoteIP)
          m_fails[hostId] = 0;
          m_times[hostId] = ntime;
 
-         qDebug() << "Added new Host Entry" << remoteIP << 0 << ntime;
+          // qDebug() << "Added new Host Entry" << remoteIP << 0 << ntime;
 
     }
     QDateTime lastTime = QDateTime::fromSecsSinceEpoch(m_times[hostId]);
@@ -77,7 +77,7 @@ void FirewallController::record_failed_login(QString remoteIP)
     int failCount = m_fails[hostId];
     if (failCount > FAILED_LOGIN_COUNT) {
         m_bans[remoteIP] = ntime + FAILED_LOGIN_BAN_TIME;
-        qDebug() << remoteIP << "has been banned";
+         // qDebug() << remoteIP << "has been banned";
     }
 
 }

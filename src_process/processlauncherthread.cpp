@@ -21,16 +21,16 @@ QByteArray ProcessLauncherThread::run_internal_script(QString scriptFile, QStrin
     myProcess->start("/bin/bash", (QStringList() << program << scriptArgs));
    // myProcess->setReadChannelMode(QProcess::ForwardedOutputChannel);
     if (!myProcess->waitForStarted(3000)) {
-        qDebug() << "Failed";
+         // qDebug() << "Failed";
     } else {
-        qDebug() << myProcess->arguments();
-        qDebug() << myProcess->state();
+         // qDebug() << myProcess->arguments();
+         // qDebug() << myProcess->state();
 
     }
     if (!myProcess->waitForFinished(-1)) {
-        qDebug() << "Took too long";
+         // qDebug() << "Took too long";
     } else {
-        //qDebug() << myProcess->readAll();
+        // // qDebug() << myProcess->readAll();
         return myProcess->readAll();
     }
     return myProcess->readAll();
@@ -46,16 +46,16 @@ QByteArray ProcessLauncherThread::run_external_script(QString scriptFile, QStrin
     myProcess->start("/bin/bash", (QStringList() << program << scriptArgs));
    // myProcess->setReadChannelMode(QProcess::ForwardedOutputChannel);
     if (!myProcess->waitForStarted(3000)) {
-        qDebug() << "Failed";
+         // qDebug() << "Failed";
     } else {
-        qDebug() << myProcess->arguments();
-        qDebug() << myProcess->state();
+         // qDebug() << myProcess->arguments();
+         // qDebug() << myProcess->state();
 
     }
     if (!myProcess->waitForFinished(120000)) {
-        qDebug() << "Took too long";
+         // qDebug() << "Took too long";
     } else {
-        qDebug() << myProcess->readAll();
+         // qDebug() << myProcess->readAll();
     }
     return myProcess->readAllStandardOutput();
     //return myProcess->readAll();

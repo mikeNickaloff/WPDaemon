@@ -23,7 +23,7 @@ WebSocketClient::WebSocketClient(QObject *parent, WebSocketTransport* i_client, 
 
      }
      emit clientGateway->requireLogin();
-     qDebug() << "Connection from" << this->remoteIP;
+      // qDebug() << "Connection from" << this->remoteIP;
 
 }
 

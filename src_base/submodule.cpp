@@ -27,7 +27,7 @@ QVariant Submodule::get_command_dump(QString subproperty)
     QByteArray output;
     output.append(processLauncher->run_internal_script("get_submodule_commands.sh", (QStringList() << moduleName << subproperty)));
 
-    qDebug() << output;
+     // qDebug() << output;
     return QVariant::fromValue(output);
 
 }
@@ -38,21 +38,21 @@ QVariant Submodule::get_synopsis(QString subproperty, int subcommand_index)
     QByteArray output;
     output.append(processLauncher->run_internal_script("get_submodule_commands.sh", (QStringList() << moduleName << subproperty << QString("%1").arg(subcommand_index))));
 
-    qDebug() << output;
+     // qDebug() << output;
     return QVariant::fromValue(output);
 }
 
 int Submodule::set_current_command(QString cmd_name)
 {
     QHash<int, SubmoduleCommand*>::const_iterator i = this->commands.constBegin();
-    qDebug() << "Checking for" << cmd_name << "in" << commands.values();
+     // qDebug() << "Checking for" << cmd_name << "in" << commands.values();
     while (i != this->commands.constEnd()) {
         SubmoduleCommand* tmp_cmd = i.value();
         if (tmp_cmd->name == cmd_name) {
             this->currentCommand = tmp_cmd;
             return i.key();
         } else {
-         qDebug() << tmp_cmd->name << "does not match " << cmd_name;
+          // qDebug() << tmp_cmd->name << "does not match " << cmd_name;
         }
         i++;
     }

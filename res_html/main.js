@@ -37,12 +37,14 @@ function set_submodule(selectedSubmodule) {
 
 
     w3.show("#command_selector");
+     w3.hide("#parameter_selector");
      w3.displayObject('command_selector', JSON.parse(args)) });
-    document.getElementById("submodule_name").innerHTML = selectedSubmodule;
+    document.getElementById("submodule_name").innerHTML = "<i class='far fa-arrow-square-left'></i>Main Menu";
 }
 function display_all_submodules() {
     var myObject
     w3.hide("#command_selector");
+    w3.hide("#parameter_selector");
     window.scrollTo(0,document.getElementById("submodule-container").offsetTop);
     channel.objects.clientInteraction.allowedSubmodules(
                 function (arg) {
@@ -58,6 +60,7 @@ function display_all_submodules() {
 function display_all_commands() {
     w3.hide("#parameter_selector");
     w3.show("#command_selector");
+    w3.hide("#submodule_selector");
 }
 function submitMessage(event) {
     channel.objects.chatserver.sendMessage($('#loginname').val(),
@@ -103,7 +106,7 @@ function set_command(i_command) {
 
     w3.show("#parameter_selector");
      w3.displayObject('parameter_selector', JSON.parse(args)) });
-    document.getElementById("command_name").innerHTML = i_command;
+    document.getElementById("command_name").innerHTML = "<i class='far fa-arrow-square-left'></i>Previous Menu";
 }
 
 function open_site_dashboard(i_site) {

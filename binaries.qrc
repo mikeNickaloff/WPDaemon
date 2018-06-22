@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res_scripts/wp</file>
+        <file>res_scripts/commands.txt</file>
+        <file>res_scripts/jq</file>
+    </qresource>
+</RCC>
