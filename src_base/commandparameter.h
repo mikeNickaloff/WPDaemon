@@ -19,6 +19,8 @@ public:
     QStringList find_captures(QString regexString);
 
     QString html();
+    QString flagProperty;
+    QString flagValue;
 signals:
 
 public slots:

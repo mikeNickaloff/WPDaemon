@@ -153,16 +153,41 @@ QVariant ClientInteraction::set_current_command(QString i_command)
                 param->m_string.remove("&");
                 param->m_string.remove(">");
                 param->m_string.remove("<");
+                param->m_string.remove("--");
                 param->m_string.remove("\"");
                 param->m_string.remove("[");
                 param->m_string.remove("]");
+                param->m_string.remove("}");
+                param->m_string.remove("{");
                 param->m_string.remove("\\n");
                 param->m_string.remove(QChar(QChar::LineFeed));
                 param->m_string.remove(QChar(QChar::CarriageReturn));
+                param->m_string.remove(QChar(QChar::LineSeparator));
+                if ((param->isRequired) || (param->isOptional)) {
+                    QString newStr = QString("{\"name\":\"%1\",\"type\":\"%2\",\"html\":\"%3\"}").arg(param->m_string).arg(paramType).arg(param->html());
+                    rv.append(newStr);
+                }
+                if ((param->isSwitch) || (param->isLong)) {
 
-                QString newStr = QString("{\"name\":\"%1\",\"type\":\"%2\",\"html\":\"%3\"}").arg(param->m_string).arg(paramType).arg(param->html());
-                rv.append(newStr);
+                    param->flagProperty.remove("&");
+                    param->flagProperty.remove(">");
+                    param->flagProperty.remove("<");
+                    param->flagProperty.remove("--");
+                    param->flagProperty.remove("\"");
+                    param->flagProperty.remove("[");
+                    param->flagProperty.remove("]");
+                    param->flagProperty.remove("}");
+                    param->flagProperty.remove("{");
+                    param->flagProperty.remove("\\n");
+                    param->flagProperty.remove(" ");
+                    param->flagProperty.remove(QChar(QChar::LineFeed));
+                    param->flagProperty.remove(QChar(QChar::CarriageReturn));
+                    param->flagProperty.remove(QChar(QChar::LineSeparator));
 
+
+                    QString newStr = QString("{\"name\":\"%1\",\"type\":\"%2\",\"html\":\"%3\"}").arg(param->flagProperty).arg(paramType).arg(param->html());
+                    rv.append(newStr);
+                }
                 if (i < (this->currentSubmodule->currentCommand->parameters.values().count() - 1)) {
                   rv.append(",");
                 }

@@ -14,6 +14,7 @@ class LoginController;
 class WebSocketClient;
 class DatabaseController;
 class FirewallController;
+class ConfigController;
 class WebSocketController : public QObject
 {
     Q_OBJECT
@@ -26,6 +27,7 @@ public:
     WebSocketClient* new_client;
     DatabaseController* m_db;
     FirewallController* m_firewall;
+    ConfigController* m_settings;
 
 
 signals:

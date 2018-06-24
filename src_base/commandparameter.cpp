@@ -35,6 +35,27 @@ QString CommandParameter::html()
     if (isOptional) {
         rv = QString("<input type='text' name='%1' class='w3-input w3-rest w3-border-blue'>").arg(parameterIndex);
     }
+    if (isSwitch) {
+        rv = QString("<input type='checkbox' name='%1' class='w3-checkbox w3-input w3-rest w3-large'>").arg(parameterIndex);
+    }
+    if (isLong) {
+        flagValue.remove("&");
+        flagValue.remove(">");
+        flagValue.remove("<");
+        flagValue.remove("--");
+        flagValue.remove("\"");
+        flagValue.remove("[");
+        flagValue.remove("]");
+        flagValue.remove("}");
+        flagValue.remove("{");
+        flagValue.remove("\\n");
+        flagValue.remove(" ");
+        flagValue.remove(QChar(QChar::LineFeed));
+        flagValue.remove(QChar(QChar::CarriageReturn));
+        flagValue.remove(QChar(QChar::LineSeparator));
+
+        rv = QString("<input type='text' name='%1' class=' w3-input w3-rest w3-large' placeholder='%2'>").arg(parameterIndex).arg(flagValue);
+    }
 
     return rv;
 
@@ -53,21 +74,34 @@ void CommandParameter::parse()
             optional << this->find_captures("(\\[\\[^\\>\\<]+\\]\\B)");
             if (optional.count() == 0) {
                  // qDebug() << "Switch" << m_string;
+
                 isSwitch = true;
+                flagProperty = m_string;
+                if (flagProperty.length() > 2) {
+                    flagProperty.remove(0, 3);
+                }
+
 
             } else {
                  // qDebug() << "optional" << optional.first();
                 isOptional = true;
                 m_string = optional.first();
+                flagProperty = "";
             }
         } else {
              // qDebug() << "requiured" << required.first();
             isRequired = true;
             m_string = required.first();
+            flagProperty = "";
         }
     } else {
          // qDebug() << "optional flag" << optionalFlags.first();
         m_string = optionalFlags.first();
+        flagProperty = m_string.split("=").first();
+         if (flagProperty.length() > 3) {
+             flagProperty.remove(0, 3);
+         }
+        flagValue = m_string.split("=").last();
         isLong = true;
     }
 

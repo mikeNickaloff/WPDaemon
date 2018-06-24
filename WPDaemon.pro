@@ -37,7 +37,8 @@ SOURCES += main.cpp \
     src_base/submodulecommand.cpp \
     src_base/commandparameter.cpp \
     src_base/website.cpp \
-    src_interfaces/websitecontroller.cpp
+    src_interfaces/websitecontroller.cpp \
+    src_interfaces/configcontroller.cpp
 
 HEADERS += \
     src_interfaces/clicontroller.h \
@@ -57,7 +58,8 @@ HEADERS += \
     src_base/submodulecommand.h \
     src_base/commandparameter.h \
     src_base/website.h \
-    src_interfaces/websitecontroller.h
+    src_interfaces/websitecontroller.h \
+    src_interfaces/configcontroller.h
 
 RESOURCES += \
     resources.qrc \
