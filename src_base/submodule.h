@@ -21,6 +21,7 @@ public:
     QVariant get_synopsis(QString subproperty, int subcommand_index);
     int set_current_command(QString cmd_name);
     SubmoduleCommand* currentCommand;
+    QString toString();
 signals:
 
 public slots:

@@ -14,10 +14,12 @@ public:
     QString synopsis;
     QHash<int, CommandParameter*> parameters;
     CommandParameter* newParameter;
+    QString toString();
 signals:
 
 public slots:
     void init_parameters();
+
 };
 
 #endif // SUBMODULECOMMAND_H

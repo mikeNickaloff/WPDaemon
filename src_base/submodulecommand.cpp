@@ -3,7 +3,20 @@
 #include <QtDebug>
 SubmoduleCommand::SubmoduleCommand(QObject *parent,  QString i_name, QString i_description,QString i_synopsis) : QObject(parent), name(i_name), description(i_description), synopsis(i_synopsis)
 {
-init_parameters();
+    init_parameters();
+}
+
+QString SubmoduleCommand::toString()
+{
+    QString rv = " ";
+    rv.append(name);
+    rv.append(" ");
+ for (int i=0; i<this->parameters.values().count(); i++) {
+     rv.append(" ");
+     rv.append(parameters[i]->toString());
+     rv.append(" ");
+ }
+ return rv;
 }
 
 void SubmoduleCommand::init_parameters()

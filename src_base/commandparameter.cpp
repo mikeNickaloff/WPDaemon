@@ -30,13 +30,13 @@ QString CommandParameter::html()
 {
     QString rv;
     if (isRequired) {
-        rv = QString("<input type='text' name='%1' class='w3-input w3-rest w3-border-red' required>").arg(parameterIndex);
+        rv = QString("<input type='text' name='%1' class='w3-input w3-rest w3-border-red wp-parameter' required>").arg(parameterIndex);
     }
     if (isOptional) {
-        rv = QString("<input type='text' name='%1' class='w3-input w3-rest w3-border-blue'>").arg(parameterIndex);
+        rv = QString("<input type='text' name='%1' class='w3-input w3-rest w3-border-blue wp-parameter'>").arg(parameterIndex);
     }
     if (isSwitch) {
-        rv = QString("<input type='checkbox' name='%1' class='w3-checkbox w3-input w3-rest w3-large'>").arg(parameterIndex);
+        rv = QString("<input type='checkbox' name='%1' class='w3-checkbox w3-rest w3-large wp-parameter'>").arg(parameterIndex);
     }
     if (isLong) {
         flagValue.remove("&");
@@ -54,11 +54,37 @@ QString CommandParameter::html()
         flagValue.remove(QChar(QChar::CarriageReturn));
         flagValue.remove(QChar(QChar::LineSeparator));
 
-        rv = QString("<input type='text' name='%1' class=' w3-input w3-rest w3-large' placeholder='%2'>").arg(parameterIndex).arg(flagValue);
+        rv = QString("<input type='text' name='%1' class=' w3-input w3-rest w3-large wp-parameter' placeholder='%2'>").arg(parameterIndex).arg(flagValue);
     }
 
     return rv;
 
+}
+
+QString CommandParameter::toString()
+{
+    QString rv;
+    if ((isOptional == true) || (isRequired == true)) {
+
+        return this->parameterValue.toString();
+
+    }
+    if (isSwitch == true) {
+        if (this->parameterValue.toBool() == true) {
+            return QString("--%1").arg(this->flagProperty);
+        } else {
+            return " ";
+        }
+    }
+    if (isLong == true) {
+        if (parameterValue.toString().length() > 0) {
+            return QString("--%1=%2").arg(flagProperty).arg(parameterValue.toString());
+        } else {
+            return "";
+        }
+    }
+
+    return " ";
 }
 
 void CommandParameter::parse()
@@ -73,7 +99,7 @@ void CommandParameter::parse()
             QStringList optional;
             optional << this->find_captures("(\\[\\[^\\>\\<]+\\]\\B)");
             if (optional.count() == 0) {
-                 // qDebug() << "Switch" << m_string;
+                // qDebug() << "Switch" << m_string;
 
                 isSwitch = true;
                 flagProperty = m_string;
@@ -83,26 +109,31 @@ void CommandParameter::parse()
 
 
             } else {
-                 // qDebug() << "optional" << optional.first();
+                // qDebug() << "optional" << optional.first();
                 isOptional = true;
                 m_string = optional.first();
                 flagProperty = "";
             }
         } else {
-             // qDebug() << "requiured" << required.first();
+            // qDebug() << "requiured" << required.first();
             isRequired = true;
             m_string = required.first();
             flagProperty = "";
         }
     } else {
-         // qDebug() << "optional flag" << optionalFlags.first();
+        // qDebug() << "optional flag" << optionalFlags.first();
         m_string = optionalFlags.first();
         flagProperty = m_string.split("=").first();
-         if (flagProperty.length() > 3) {
-             flagProperty.remove(0, 3);
-         }
+        if (flagProperty.length() > 3) {
+            flagProperty.remove(0, 3);
+        }
         flagValue = m_string.split("=").last();
         isLong = true;
     }
 
+}
+
+void CommandParameter::set_value(QVariant val)
+{
+    this->parameterValue = val;
 }

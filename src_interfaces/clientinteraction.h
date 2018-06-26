@@ -24,11 +24,13 @@ public:
     Q_INVOKABLE QVariant set_current_submodule(QString i_module);
     Q_INVOKABLE QVariant set_current_command(QString i_command);
     Submodule* currentSubmodule;
+    Q_INVOKABLE QVariant execute();
 signals:
     void requireLogin();
     void LoginSuccessful();
     void LoginFailed();
 public slots:
+    Q_INVOKABLE void set_parameter_value(int paramidx, QVariant val);
 
 };
 

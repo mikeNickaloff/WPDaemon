@@ -209,3 +209,24 @@ QVariant ClientInteraction::set_current_command(QString i_command)
          return QVariant::fromValue(QString("{}"));
     }
 }
+
+QVariant ClientInteraction::execute()
+{
+    QString rv;
+    if (this->currentSubmodule != nullptr) {
+        rv.append(currentSubmodule->toString());
+    }
+    return QVariant::fromValue(rv);
+}
+
+void ClientInteraction::set_parameter_value(int paramidx, QVariant val)
+{
+    if (this->currentSubmodule != nullptr) {
+        if (this->currentSubmodule->currentCommand != nullptr) {
+            if (this->currentSubmodule->currentCommand->parameters.keys().contains(paramidx)) {
+                CommandParameter* param = currentSubmodule->currentCommand->parameters[paramidx];
+                param->set_value(val);
+            }
+        }
+    }
+}

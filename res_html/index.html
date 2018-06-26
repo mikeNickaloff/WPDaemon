@@ -156,6 +156,7 @@
 	<table class="w3-table w3-striped w3-white w3-animate-left" id="command_selector" >
 	<tr w3-repeat="commands" class="w3-animate-left"><td><a href="javascript: set_command('{{name}}');" class="w3-button w3-padding-2"><i class="fa fa-toolbox"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
       </table>
+
       </div>
 
 <div class="w3-card-2 w3-animate-left" id="parameter-container">
@@ -163,6 +164,8 @@
   <table class="w3-table w3-white w3-animate-left" id="parameter_selector" >
   <tr w3-repeat="parameters" class="w3-animate-left"><td><i class="fa fa-angle-right"></i>&nbsp; {{name}}</td><td>{{html}}</tr>
 </table>
+<br>
+ <a id="executeButton" href="javascript:executeCommand()" class="w3-button w3-input w3-xxlarge w3-green w3-text-white">Execute</a>
 </div>
     </div>
   </div>

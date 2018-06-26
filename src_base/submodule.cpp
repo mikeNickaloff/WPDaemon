@@ -60,6 +60,17 @@ int Submodule::set_current_command(QString cmd_name)
     return -1;
 }
 
+QString Submodule::toString()
+{
+    QString rv;
+    rv.append(moduleName);
+    rv.append(" ");
+    if (currentCommand != nullptr) {
+        rv.append(currentCommand->toString());
+    }
+    return rv;
+}
+
 
 void Submodule::add_command(QString i_name, QString i_desc, QString i_synopsis)
 {

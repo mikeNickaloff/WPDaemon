@@ -2,7 +2,7 @@
 #define COMMANDPARAMETER_H
 
 #include <QObject>
-
+#include <QVariant>
 class CommandParameter : public QObject
 {
     Q_OBJECT
@@ -21,10 +21,13 @@ public:
     QString html();
     QString flagProperty;
     QString flagValue;
+    QVariant parameterValue;
+    QString toString();
 signals:
 
 public slots:
 void parse();
+void set_value(QVariant val);
 
 };
 

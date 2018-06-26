@@ -119,3 +119,20 @@ function open_site_dashboard(i_site) {
     });
     /* perform site dashboard load */
 } // clang-format on
+
+function executeCommand() {
+    var i;
+    var params1;
+    var u;
+    var params2;
+   params1 = document.querySelectorAll(".wp-parameter[type='text']");
+    for (i=0; i<params1.length; i++) {
+        channel.objects.clientInteraction.set_parameter_value(params1[i].name, params1[i].value);
+    }
+    params2 = document.querySelectorAll(".wp-parameter[type='checkbox']");
+       for (u=0; u<params2.length; u++) {
+           channel.objects.clientInteraction.set_parameter_value(params2[u].name, params2[u].checked);
+       }
+    channel.objects.clientInteraction.execute(function(args) { console.log(args); });
+
+}
