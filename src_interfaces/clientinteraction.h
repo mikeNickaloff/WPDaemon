@@ -10,6 +10,7 @@ class FirewallController;
 class Submodule;
 class SubmoduleCommand;
 class CommandParameter;
+class ProcessLauncherThread;
 /* this is the controller that clients will talk to via webchannel */
 class ClientInteraction : public QObject
 {
@@ -24,6 +25,7 @@ public:
     Q_INVOKABLE QVariant set_current_submodule(QString i_module);
     Q_INVOKABLE QVariant set_current_command(QString i_command);
     Submodule* currentSubmodule;
+    ProcessLauncherThread* processLauncher;
     Q_INVOKABLE QVariant execute();
 signals:
     void requireLogin();

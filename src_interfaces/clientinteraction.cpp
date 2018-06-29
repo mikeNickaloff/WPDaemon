@@ -11,6 +11,8 @@
 #include <QVariantHash>
 #include <QVariant>
 #include <QtDebug>
+#include "../src_interfaces/processcontroller.h"
+#include "../src_process/processlauncherthread.h"
 ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login, FirewallController* i_firewall) : QObject(parent), loginController(i_login), firewallController(i_firewall)
 {
 
@@ -216,7 +218,14 @@ QVariant ClientInteraction::execute()
     if (this->currentSubmodule != nullptr) {
         rv.append(currentSubmodule->toString());
     }
-    return QVariant::fromValue(rv);
+    this->processLauncher = new ProcessLauncherThread("wp", (QStringList() << rv.split(" ")), "internal");
+    QByteArray output;
+    output.append(processLauncher->run_internal_script("wp", (QStringList() << rv.split(" "))));
+
+     // qDebug() << output;
+    return QVariant::fromValue(output);
+
+    //return QVariant::fromValue(rv);
 }
 
 void ClientInteraction::set_parameter_value(int paramidx, QVariant val)
