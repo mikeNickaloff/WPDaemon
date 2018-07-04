@@ -9,13 +9,19 @@ class WebsiteController : public QObject
 {
     Q_OBJECT
 public:
-    explicit WebsiteController(QObject *parent = nullptr);
-    QHash<int, Website*> websites;
+    explicit WebsiteController(QObject *parent = nullptr, DatabaseController* i_db = nullptr);
+    //  to be implemented if expanding later
+  //QHash<int, Website*> websites;
+
+  QHash<QString, QString> websites;
+
     Website* new_website;
     Website* currentWebsite;
+    DatabaseController* db;
 signals:
 
 public slots:
+    void add_site(QString i_name, QString i_path);
 };
 
 #endif // WEBSITECONTROLLER_H

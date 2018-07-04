@@ -10,7 +10,7 @@ WebSocketClient::WebSocketClient(QObject *parent, WebSocketTransport* i_client, 
 {
  channel = new QWebChannel(this);
  m_login = new LoginController(this, m_db);
-     clientGateway = new ClientInteraction(this, m_login, m_firewall);
+     clientGateway = new ClientInteraction(this, m_login, m_firewall, this->m_db);
      this->connect(clientGateway, &ClientInteraction::LoginFailed, this, &WebSocketClient::process_failed_login);
      channel->registerObject(QStringLiteral("clientInteraction"), clientGateway);
      channel->connectTo(m_client);

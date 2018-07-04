@@ -1,5 +1,5 @@
 'use strict'
-var wsUri = "wss://localhost:65300"
+var wsUri = "wss://127.0.0.1:65300"
 window.loggedin = false
 
 window.onload = function () {

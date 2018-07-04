@@ -1,8 +1,30 @@
 // clang-format off
 $(document).ready(function () {
-    $('#loginForm').submit(submitForm)
+    $('#loginForm').submit(submitForm);
+    $("#siteForm").submit(addSite);
 })
+function open_new_site_dialog() {
+   $("#siteDialog").show();
+}
+function addSite(event) {
+    channel.objects.clientInteraction.add_site($('#sitename').val(), $('#sitepath').val(), function(arg) {
+          alert(arg);
+          $('#siteDialog').hide();
+          display_all_sites();
+    });
+    if (event !== undefined)
+        event.preventDefault()
+    return false
+}
+function display_all_sites() {
+    channel.objects.clientInteraction.websites(function(arg) {
+        myObject = JSON.parse(arg)
 
+
+        w3.show("website_selector");
+        w3.displayObject('website_selector', JSON.parse(arg))
+    });
+}
 function submitForm(event) {
     //console.log("DEBUG login: " + channel)
 
@@ -15,6 +37,7 @@ function submitForm(event) {
                                                     document.getElementById('loginDialog').style.display = 'none';
                                                     window.scrollTo(0,document.getElementById("submodule-container").offsetTop);                                                   window.loggedin = true
                                                     display_all_submodules();
+                                                    display_all_sites();
                                                 } else {
                                                     $('#LoginError').html(
                                                                 "Invalid Username/Password")

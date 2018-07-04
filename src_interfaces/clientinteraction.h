@@ -11,14 +11,16 @@ class Submodule;
 class SubmoduleCommand;
 class CommandParameter;
 class ProcessLauncherThread;
+class WebsiteController;
 /* this is the controller that clients will talk to via webchannel */
 class ClientInteraction : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClientInteraction(QObject *parent = nullptr, LoginController *i_login = nullptr, FirewallController* i_firewall = nullptr);
+    explicit ClientInteraction(QObject *parent = nullptr, LoginController *i_login = nullptr, FirewallController* i_firewall = nullptr, DatabaseController* i_db = nullptr);
     LoginController* loginController;
     FirewallController* firewallController;
+    DatabaseController* db;
     Q_INVOKABLE bool login(QString username, QString password);
     QString remoteIP;
     Q_INVOKABLE QVariant allowedSubmodules();
@@ -27,6 +29,9 @@ public:
     Submodule* currentSubmodule;
     ProcessLauncherThread* processLauncher;
     Q_INVOKABLE QVariant execute();
+    Q_INVOKABLE QVariant add_site(QString i_name, QString i_path);
+    WebsiteController* websiteController;
+    Q_INVOKABLE QVariant websites();
 signals:
     void requireLogin();
     void LoginSuccessful();

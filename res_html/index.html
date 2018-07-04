@@ -24,7 +24,7 @@
     </style>
     <!--<script>
         'use strict';
-	var wsUri = "ws://localhost:65300";
+      var wsUri = "wss://localhost:65300";
         window.loggedin = false;
 
         window.onload = function() {
@@ -81,11 +81,14 @@
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>&nbsp; Overview</a>
     </div>
-    <div class="w3-bar-block" w3-repeat="websites">
-    <a href="javascript: open_site_dashboard('{{sitename}}')" class="w3-bar-item w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>&nbsp; {{sitename}}</a>
+
+    <div class="w3-bar-block" id="website_selector" ><div class="w3-block" w3-repeat="websites">
+    <a href="javascript: open_site_dashboard('{{sitename}}')" class="w3-bar-item w3-button w3-padding w3-black"><i class="fa fa-globe fa-fw"></i>&nbsp; {{sitename}}</a>
   </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-green " onclick="javascript:open_new_site_dialog()" title="Add new Site"><i class="fa fa-remove fa-fw"></i>&nbsp; Add New / Existing Site</a>
+    </div>
 </nav>
 
 
@@ -289,7 +292,7 @@
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
     <h4>FOOTER</h4>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    <p>Created by <a href="https://www.datafault.net/" target="_blank">datafault.net</a></p>
   </footer>
 
   <!-- End page content -->
@@ -330,7 +333,38 @@
   </div>
 
 
+<!-- add site dialog -->
 
+<div id="siteDialog" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+    <div class="w3-center"><br>
+    <span onclick="document.getElementById('siteDialog').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+    <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+    </div>
+
+    <form id="siteForm" class="w3-container" action="javascript:void(0)">
+    <div class="w3-section">
+    <label><b>Name of Site</b></label>
+    <input class="w3-input w3-border" type="text" placeholder="Display Name for the Site" name="sitename" id="sitename" required>
+      <label><b>Filesystem Path</b></label>
+
+      <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Local Path to Site" name="sitepath" id="sitepath" required>
+
+      <div style="text-align:center;padding:5px" id="loginError">
+
+      </div>
+<button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Add Site</button>
+
+    </div>
+    </form>
+    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+    <button onclick="document.getElementById('siteDialog').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+
+    </div>
+
+  </div>
+</div>
 
 
 </body>

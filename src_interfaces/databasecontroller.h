@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QVector>
+#include <QVariant>
 class AssetUnpacker;
 class DatabaseController : public QObject
 {
@@ -21,6 +22,7 @@ signals:
 public slots:
     void load_database(QString filepath);
     QVector<QVector<QString> > executeSelectQuery(QString table, QStringList columns, QString extraParameters);
+    void executeInsert(QString table, QVariantList values);
 
 
 };

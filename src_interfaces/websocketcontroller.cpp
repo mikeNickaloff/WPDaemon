@@ -33,8 +33,8 @@ WebSocketController::WebSocketController(QObject *parent, DatabaseController* i_
 QFile keyFile(QStringLiteral(":/localhost.key")); */
 
 
-    QFile certFile(m_settings->settings()->value("ssl_certificate_file", qApp->applicationDirPath().append(QDir::separator()).append(QStringLiteral("fullchain.cert"))).toString());
-    QFile keyFile(m_settings->settings()->value("ssl_key_file", qApp->applicationDirPath().append(QDir::separator()).append(QStringLiteral("fullchain.key"))).toString());
+    QFile certFile(m_settings->settings()->value("ssl_certificate_file", qApp->applicationDirPath().append(QDir::separator()).append(QStringLiteral("cert.pem"))).toString());
+    QFile keyFile(m_settings->settings()->value("ssl_key_file", qApp->applicationDirPath().append(QDir::separator()).append(QStringLiteral("key.pem"))).toString());
     certFile.open(QIODevice::ReadOnly);
     keyFile.open(QIODevice::ReadOnly);
     QSslCertificate certificate(&certFile, QSsl::Pem);
