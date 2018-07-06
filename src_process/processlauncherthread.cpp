@@ -13,8 +13,8 @@ ProcessLauncherThread::ProcessLauncherThread(QString file, QStringList args, QSt
 
 QByteArray ProcessLauncherThread::run_internal_script(QString scriptFile, QStringList scriptArgs)
 {
-    QString program = qApp->applicationDirPath().append(QDir::separator()).append("scripts").append(QDir::separator()).append(QString(scriptFile));
-
+  QString program = qApp->applicationDirPath().append(QDir::separator()).append("scripts").append(QDir::separator()).append(QString(scriptFile));
+  qDebug() << "Running" << program << scriptArgs;
     QProcess *myProcess = new QProcess(parent());
     myProcess->setWorkingDirectory(qApp->applicationDirPath().append(QDir::separator()).append("scripts"));
 
@@ -22,7 +22,7 @@ QByteArray ProcessLauncherThread::run_internal_script(QString scriptFile, QStrin
     if (scriptFile == "start_https.sh") {
         myProcess->setReadChannelMode(QProcess::ForwardedOutputChannel);
     }
-      myProcess->start("/bin/bash", (QStringList() << program << scriptArgs));
+      myProcess->start(program, (QStringList() << scriptArgs));
     if (!myProcess->waitForStarted(3000)) {
         // qDebug() << "Failed";
     } else {

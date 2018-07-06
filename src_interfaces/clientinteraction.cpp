@@ -171,7 +171,7 @@ QVariant ClientInteraction::set_current_command(QString i_command)
                   QString newStr = QString("{\"name\":\"%1\",\"type\":\"%2\",\"html\":\"%3\"}").arg(param->m_string).arg(paramType).arg(param->html());
                   rv.append(newStr);
                 }
-              if ((param->isSwitch) || (param->isLong)) {
+              if ((param->isSwitch) || (param->isLong) || (param->isRequiredLong)) {
 
                   param->flagProperty.remove("&");
                   param->flagProperty.remove(">");
@@ -220,11 +220,12 @@ QVariant ClientInteraction::execute()
   if (this->currentSubmodule != nullptr) {
       rv.append(currentSubmodule->toString());
     }
-  this->processLauncher = new ProcessLauncherThread("wp", (QStringList() << rv.split(" ")), "internal");
+  if (websiteController->currentWebsite == "./tmp") { return QVariant::fromValue(QString("Error. please select a website to execute command for")); }
+  this->processLauncher = new ProcessLauncherThread("wp", (QStringList() << rv.split(" ", QString::SkipEmptyParts)), "internal");
   QByteArray output;
-  output.append(processLauncher->run_internal_script("wp", (QStringList() << rv.split(" "))));
+  output.append(processLauncher->run_internal_script("wp", (QStringList() << QString("--path=%1").arg(websiteController->currentWebsite) << rv.split(" ", QString::SkipEmptyParts))));
 
-  // qDebug() << output;
+   qDebug() << output;
   return QVariant::fromValue(output);
 
   //return QVariant::fromValue(rv);
@@ -295,4 +296,16 @@ void ClientInteraction::set_parameter_value(int paramidx, QVariant val)
             }
         }
     }
+}
+
+bool ClientInteraction::set_current_site(QString sitename)
+{
+  if( websiteController->websites.keys().contains(sitename)) {
+      this->websiteController->currentWebsite = websiteController->websites.value(sitename);
+      return true;
+    } else {
+      this->websiteController->currentWebsite = websiteController->websites.value("./tmp");
+      return false;
+    }
+  return false;
 }

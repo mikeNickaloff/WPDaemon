@@ -15,6 +15,7 @@ public:
     bool isVarArg;
     bool isSwitch;
     int parameterIndex;
+    bool isRequiredLong;
     QString m_string;
     QStringList find_captures(QString regexString);
 

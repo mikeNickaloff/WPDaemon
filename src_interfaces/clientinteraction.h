@@ -32,6 +32,7 @@ public:
     Q_INVOKABLE QVariant add_site(QString i_name, QString i_path);
     WebsiteController* websiteController;
     Q_INVOKABLE QVariant websites();
+    Q_INVOKABLE bool set_current_site(QString sitename);
 signals:
     void requireLogin();
     void LoginSuccessful();

@@ -10,7 +10,7 @@
 #include <QThread>
 Submodule::Submodule(QObject *parent) : QObject(parent)
 {
-
+  this->currentCommand = nullptr;
 }
 // Synopsis Parser
 // [value]             (\[\S+\]\B)

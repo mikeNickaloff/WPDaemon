@@ -12,11 +12,13 @@ public:
     explicit WebsiteController(QObject *parent = nullptr, DatabaseController* i_db = nullptr);
     //  to be implemented if expanding later
   //QHash<int, Website*> websites;
+  //  Website* new_website;
+ //   Website* currentWebsite;
 
+  QString currentWebsite;
   QHash<QString, QString> websites;
 
-    Website* new_website;
-    Website* currentWebsite;
+
     DatabaseController* db;
 signals:
 

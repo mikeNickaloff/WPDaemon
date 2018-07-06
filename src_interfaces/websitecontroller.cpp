@@ -10,12 +10,14 @@
 
 WebsiteController::WebsiteController(QObject *parent, DatabaseController *i_db) : QObject(parent), db(i_db)
 {
+  this->currentWebsite = "./tmp";
   QVector<QVector<QString> > rv(db->executeSelectQuery("WEBSITES", (QStringList() << "NAME" << "PATH"), QString("")));
   QVectorIterator<QVector<QString > > i(rv);
   while (i.hasNext()) {
       QVector<QString> rowData(i.next());
       qDebug() << rowData;
       this->websites[rowData.at(0)] = rowData.at(1);
+
     }
 
 }
