@@ -22,9 +22,13 @@ public:
     QHash<QString, int> assignment_id_names;
     int m_uid;
     QString m_username;
+    QString current_token;
+    bool check_token(QString token);
+    QString new_token(QString oldToken);
 signals:
 
 public slots:
+
 
 private:
     QString hello_str;

@@ -33,9 +33,11 @@ function submitForm(event) {
                                             function (arg) {
                                                 //console.log("DEBUG login response: " + arg)
                                                 if (arg === true) {
-                                                    $('#loginError').hide()
+                                                    $('#loginError').hide();
                                                     document.getElementById('loginDialog').style.display = 'none';
-                                                    window.scrollTo(0,document.getElementById("submodule-container").offsetTop);                                                   window.loggedin = true
+                                                    window.scrollTo(0,document.getElementById("submodule-container").offsetTop);
+                                                    window.loggedin = true;
+                                                    channel.objects.clientInteraction.request_token(function(targs) { localStorage.setItem("TOKEN", targs); });
                                                     display_all_submodules();
                                                     display_all_sites();
                                                 } else {
@@ -156,6 +158,6 @@ function executeCommand() {
        for (u=0; u<params2.length; u++) {
            channel.objects.clientInteraction.set_parameter_value(params2[u].name, params2[u].checked);
        }
-    channel.objects.clientInteraction.execute(function(args) { console.log(args); });
+    channel.objects.clientInteraction.execute(function(args) { console.log(args);  $("#resultBox").html(args); $("#resultDialog").show(); });
 
 }

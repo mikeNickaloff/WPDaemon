@@ -22,6 +22,8 @@ public:
     FirewallController* firewallController;
     DatabaseController* db;
     Q_INVOKABLE bool login(QString username, QString password);
+    Q_INVOKABLE bool tokenLogin(QString token);
+    Q_INVOKABLE QVariant request_token();
     QString remoteIP;
     Q_INVOKABLE QVariant allowedSubmodules();
     Q_INVOKABLE QVariant set_current_submodule(QString i_module);

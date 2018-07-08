@@ -17,7 +17,7 @@
 #include <QDir>
 ClientInteraction::ClientInteraction(QObject *parent, LoginController *i_login, FirewallController* i_firewall, DatabaseController *i_db) : QObject(parent), loginController(i_login), firewallController(i_firewall), db(i_db)
 {
- this->websiteController = new WebsiteController(this, db);
+  this->websiteController = new WebsiteController(this, db);
 }
 
 bool ClientInteraction::login(QString username, QString password)
@@ -37,6 +37,37 @@ bool ClientInteraction::login(QString username, QString password)
     }
   emit this->LoginFailed();
   return false;
+}
+
+bool ClientInteraction::tokenLogin(QString token)
+{
+  if (!firewallController->isBanned(this->remoteIP)) {
+
+
+      if (loginController->loggedIn == false) {
+          if (loginController->check_token(token) == true) {
+              emit this->LoginSuccessful();
+              return true;
+            }
+        } else {
+
+          return true;
+        }
+    }
+  emit this->LoginFailed();
+  return false;
+}
+
+QVariant ClientInteraction::request_token()
+{
+  if (!loginController->loggedIn) { emit this->requireLogin(); return QVariant::fromValue(QString("")); } else {
+      if (this->loginController->loggedIn == true) {
+          QString newToken = this->loginController->new_token(loginController->current_token);
+          loginController->current_token = newToken;
+          return QVariant::fromValue(newToken);
+        }
+      return QVariant::fromValue(QString("You must first login"));
+    }
 }
 
 QVariant ClientInteraction::allowedSubmodules()
@@ -225,7 +256,7 @@ QVariant ClientInteraction::execute()
   QByteArray output;
   output.append(processLauncher->run_internal_script("wp", (QStringList() << QString("--path=%1").arg(websiteController->currentWebsite) << rv.split(" ", QString::SkipEmptyParts))));
 
-   qDebug() << output;
+  qDebug() << output;
   return QVariant::fromValue(output);
 
   //return QVariant::fromValue(rv);
@@ -272,18 +303,18 @@ QVariant ClientInteraction::websites()
 
 
 
-      i++;
+          i++;
+        }
+      main_array = QJsonArray::fromVariantList(rv);
+
+      QJsonObject mainObject;
+
+
+      mainObject.insert("websites", QJsonValue::fromVariant(rv));
+      doc.setObject(mainObject);
+
+      return QVariant::fromValue(doc.toJson(QJsonDocument::Compact));
     }
-  main_array = QJsonArray::fromVariantList(rv);
-
-  QJsonObject mainObject;
-
-
-  mainObject.insert("websites", QJsonValue::fromVariant(rv));
-  doc.setObject(mainObject);
-
-  return QVariant::fromValue(doc.toJson(QJsonDocument::Compact));
-}
 }
 
 void ClientInteraction::set_parameter_value(int paramidx, QVariant val)
