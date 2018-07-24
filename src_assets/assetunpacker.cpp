@@ -2,12 +2,18 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <iostream>
+#include <QtDebug>
 
 AssetUnpacker::AssetUnpacker(QObject *parent) : QObject(parent)
 {
 unpack("res_scripts", "scripts");
 unpack("res_html", "public");
 unpack("res_python", "python");
+QFile confFile(qApp->applicationDirPath().append(QDir::separator()).append("wpdaemon.conf"));
+if (!confFile.exists()) {
+     qDebug() << "WELCOME TO WPDAEMON\n" << "-------------\n" << "A new file called wpdaemon.conf  has been created in the directory containing the WPDaemon Binary\n" << qApp->applicationDirPath().append(QDir::separator()).append("wpdaemon.conf") << "\n" << "\n" << "You must now do one of the following actions to properly setup WPDaemon:\n\n" << "1)  Modify WPDaemon.conf and change the ssl_certificate_file  and ssl_key_file settings to point to a valid SSL certificate / key pair\n" << "- OR -" << "Place a valid SSL Certificate in the WPDaemon folder with the name 'cert.pem'  and the corosponding key in the same folder with the name 'key.pem'" << "\n\n" << "*  NOTE: If you choose (option 1) , you must also create a symbolic/hard link or hard copy the certificate and key to match the names provided in (option 2).  This process will not be required at all starting with the first beta release, and will be replaced with an interactive prompt. ";
+unpack("res_defaults", ".");
+  }
 
 }
 

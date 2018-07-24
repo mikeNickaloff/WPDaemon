@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css" />
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css" /> -->
     <link rel="stylesheet" href="w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> -->
     <link rel="stylesheeet" href="fajs.min.css">
     <script src="fontawesome-all.min.js"></script>
     <script src="jquery-1.9.1.js"></script>
@@ -100,7 +100,7 @@
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+    <h5><b><i class="fa fa-dashboard"></i> <span id="dashboard_site_name"></span></b></h5>
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
@@ -108,10 +108,10 @@
       <div class="w3-container w3-red w3-padding-16">
 	<div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
 	<div class="w3-right">
-	  <h3>52</h3>
+        <h3><span class="dashboard_comment_count"></span></h3>
 	</div>
 	<div class="w3-clear"></div>
-	<h4>Messages</h4>
+      <h4>Comments</h4>
       </div>
     </div>
     <div class="w3-quarter">

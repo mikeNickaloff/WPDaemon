@@ -137,7 +137,8 @@ function set_command(i_command) {
 function open_site_dashboard(i_site) {
     channel.objects.clientInteraction.set_current_site(i_site, function(args) {
         if (args === true) {
-
+            var sn = document.querySelector("#dashboard_site_name");
+            sn.innerHTML = i_site;
         } else {
             alert("Could not Access Site.\n Make sure the wp-config file is readable by the WPDaemon user.");
         }

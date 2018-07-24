@@ -126,7 +126,7 @@ QVariant ClientInteraction::set_current_submodule(QString i_module)
               QStringList descList = desc.split("\n", QString::SkipEmptyParts);
               /*QString syn = currentSubmodule->get_command_dump("synopsis").toString();
                QStringList synList = syn.split("\n", QString::KeepEmptyParts); */
-
+              qDebug() << names;
               QString rv = "{\"commands\":[";
               //if (synList.count() != descList.count()) {  // qDebug() << "Synopsis Size Mismatch"; } else {
 
