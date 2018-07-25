@@ -95,15 +95,17 @@
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
+
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+<div class="w3-display-center w3-card-2 w3-red" style="margin-left:300px;margin-top:43px;" id="no_site_selected_message"> No Site Selected.   Add sites from the <b>Site Menu</b></div>
+<div class="w3-main" style="margin-left:300px;margin-top:43px;" id="main_dashboard">
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i> <span id="dashboard_site_name"></span></b></h5>
+    <h1><b><i class="fa fa-dashboard"></i> <span id="dashboard_site_name"></span></b></h5>
   </header>
 
-  <div class="w3-row-padding w3-margin-bottom">
+  <div class="w3-row-padding w3-margin-bottom" >
     <div class="w3-quarter">
       <div class="w3-container w3-red w3-padding-16">
 	<div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
@@ -121,7 +123,7 @@
 	  <h3>99</h3>
 	</div>
 	<div class="w3-clear"></div>
-	<h4>Views</h4>
+      <h4>Posts</h4>
       </div>
     </div>
     <div class="w3-quarter">
@@ -131,7 +133,7 @@
 	  <h3>23</h3>
 	</div>
 	<div class="w3-clear"></div>
-	<h4>Shares</h4>
+      <h4>Pages</h4>
       </div>
     </div>
     <div class="w3-quarter">
@@ -149,7 +151,7 @@
   <div class="w3-panel">
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-card-2" id="submodule-container">
-	<h5>Modules</h5>
+      <h5>Additional Wordpress Tools</h5>
 	<table class="w3-table w3-white w3-animate-opacity" id="submodule_selector" >
 	<tr w3-repeat="submodules" class="w3-animate-left w3-hover-lightgray"><td><a href="javascript: set_submodule('{{name}}');" class="w3-button w3-padding-2"><i class="fas fa-project-diagram"></i>&nbsp;&nbsp;&nbsp;<span class="w3-large"> {{name}}</span></a></td><td><span class="w3-label">{{description}}</span></td></tr>
       </table>

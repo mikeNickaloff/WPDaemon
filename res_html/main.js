@@ -2,6 +2,8 @@
 $(document).ready(function () {
     $('#loginForm').submit(submitForm);
     $("#siteForm").submit(addSite);
+    document.querySelector("#no_site_selected_message").style.display = 'block'
+    document.querySelector("#main_dashboard").style.display = 'none';
 })
 function open_new_site_dialog() {
    $("#siteDialog").show();
@@ -143,6 +145,8 @@ function open_site_dashboard(i_site) {
             alert("Could not Access Site.\n Make sure the wp-config file is readable by the WPDaemon user.");
         }
     });
+    document.querySelector("#no_site_selected_message").style.display = 'none'
+    document.querySelector("#main_dashboard").style.display = 'block';
     /* perform site dashboard load */
 } // clang-format on
 
