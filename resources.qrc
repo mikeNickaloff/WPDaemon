@@ -18,5 +18,8 @@
         <file>res_defaults/cert.pem</file>
         <file>res_defaults/key.pem</file>
         <file>res_defaults/wpdaemon.conf</file>
+        <file>res_html/1Ptug8zYS_SKggPNyC0ITw.woff2</file>
+        <file>res_html/1Ptug8zYS_SKggPNyCMIT5lu.woff2</file>
+        <file>res_html/google-fonts-raleway.css</file>
     </qresource>
 </RCC>

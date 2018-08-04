@@ -147,6 +147,7 @@ function open_site_dashboard(i_site) {
     });
     document.querySelector("#no_site_selected_message").style.display = 'none'
     document.querySelector("#main_dashboard").style.display = 'block';
+    console.log(get_comment_data());
     /* perform site dashboard load */
 } // clang-format on
 
@@ -164,5 +165,13 @@ function executeCommand() {
            channel.objects.clientInteraction.set_parameter_value(params2[u].name, params2[u].checked);
        }
     channel.objects.clientInteraction.execute(function(args) { console.log(args);  $("#resultBox").html(args); $("#resultDialog").show(); });
+
+}
+function get_comment_data() {
+    var commentCount = 0;
+
+ channel.objects.clientInteraction.get_comments(function(args) { console.log(args); var obj = JSON.parse(args);  document.querySelector("#dashboard_comment_count").innerHTML = obj.length; });
+
+
 
 }

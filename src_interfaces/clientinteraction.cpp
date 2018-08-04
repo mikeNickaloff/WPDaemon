@@ -262,6 +262,22 @@ QVariant ClientInteraction::execute()
   //return QVariant::fromValue(rv);
 }
 
+QVariant ClientInteraction::execute(Submodule *i_submodule)
+{
+  QString rv;
+  if (i_submodule != nullptr) {
+      rv.append(i_submodule->toString());
+    }
+  if (websiteController->currentWebsite == "./tmp") { return QVariant::fromValue(QString("Error. please select a website to execute command for")); }
+  this->processLauncher = new ProcessLauncherThread("wp", (QStringList() << rv.split(" ", QString::SkipEmptyParts)), "internal");
+  QByteArray output;
+  output.append(processLauncher->run_internal_script("wp", (QStringList() << QString("--path=%1").arg(websiteController->currentWebsite) << rv.split(" ", QString::SkipEmptyParts))));
+
+  qDebug() << output;
+  return QVariant::fromValue(output);
+
+}
+
 QVariant ClientInteraction::add_site(QString i_name, QString i_path)
 {
   if (loginController->loggedIn == true) {
@@ -339,4 +355,19 @@ bool ClientInteraction::set_current_site(QString sitename)
       return false;
     }
   return false;
+}
+
+QVariant ClientInteraction::get_comments()
+{
+  QVariant rv;
+  if (websiteController->currentWebsite != "./tmp") {
+      Submodule* new_module;
+      new_module = new Submodule(this);
+      new_module->moduleName = "comment list --format=json";
+      new_module->add_command("list", "", "");
+      new_module->set_current_command("list");
+      rv =  execute(new_module);
+      qDebug() << rv;
+    }
+  return rv;
 }

@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="jquery.mobile-1.4.2.css" />
-    <!--<link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css" />
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css" /> -->
     <link rel="stylesheet" href="w3.css">
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> -->
+    <link rel="stylesheet" href="google-fonts-raleway.css">
     <link rel="stylesheeet" href="fajs.min.css">
     <script src="fontawesome-all.min.js"></script>
     <script src="jquery-1.9.1.js"></script>
-    <!--<script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script> -->
+
     <script type="text/javascript" src="qwebchannel.js"></script>
     <script type="text/javascript" src="core.js"></script>
     <script type="text/javascript" src="sockets.js"></script>
@@ -39,11 +36,11 @@
             socket.onopen = function() {
                 window.channel = new QWebChannel(socket, function(channel) {
                     //connect to the changed signal of a property
-		console.log("connected to " + window.channel);
+            console.log("connected to " + window.channel);
 
-	       channel.objects.clientInteraction.requireLogin.connect(function() {
-		$('#loginDialog').show();
-	       });
+             channel.objects.clientInteraction.requireLogin.connect(function() {
+            $('#loginDialog').show();
+             });
             });
         }
 }
@@ -108,42 +105,42 @@
   <div class="w3-row-padding w3-margin-bottom" >
     <div class="w3-quarter">
       <div class="w3-container w3-red w3-padding-16">
-	<div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-	<div class="w3-right">
-        <h3><span class="dashboard_comment_count"></span></h3>
-	</div>
-	<div class="w3-clear"></div>
+      <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+      <div class="w3-right">
+        <h3><span id="dashboard_comment_count"></span></h3>
+      </div>
+      <div class="w3-clear"></div>
       <h4>Comments</h4>
       </div>
     </div>
     <div class="w3-quarter">
       <div class="w3-container w3-blue w3-padding-16">
-	<div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-	<div class="w3-right">
-	  <h3>99</h3>
-	</div>
-	<div class="w3-clear"></div>
+      <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+      <div class="w3-right">
+        <h3>99</h3>
+      </div>
+      <div class="w3-clear"></div>
       <h4>Posts</h4>
       </div>
     </div>
     <div class="w3-quarter">
       <div class="w3-container w3-teal w3-padding-16">
-	<div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
-	<div class="w3-right">
-	  <h3>23</h3>
-	</div>
-	<div class="w3-clear"></div>
+      <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+      <div class="w3-right">
+        <h3>23</h3>
+      </div>
+      <div class="w3-clear"></div>
       <h4>Pages</h4>
       </div>
     </div>
     <div class="w3-quarter">
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
-	<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-	<div class="w3-right">
-	  <h3>50</h3>
-	</div>
-	<div class="w3-clear"></div>
-	<h4>Users</h4>
+      <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+      <div class="w3-right">
+        <h3>50</h3>
+      </div>
+      <div class="w3-clear"></div>
+      <h4>Users</h4>
       </div>
     </div>
   </div>
@@ -152,14 +149,14 @@
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-card-2" id="submodule-container">
       <h5>Additional Wordpress Tools</h5>
-	<table class="w3-table w3-white w3-animate-opacity" id="submodule_selector" >
-	<tr w3-repeat="submodules" class="w3-animate-left w3-hover-lightgray"><td><a href="javascript: set_submodule('{{name}}');" class="w3-button w3-padding-2"><i class="fas fa-project-diagram"></i>&nbsp;&nbsp;&nbsp;<span class="w3-large"> {{name}}</span></a></td><td><span class="w3-label">{{description}}</span></td></tr>
+      <table class="w3-table w3-white w3-animate-opacity" id="submodule_selector" >
+      <tr w3-repeat="submodules" class="w3-animate-left w3-hover-lightgray"><td><a href="javascript: set_submodule('{{name}}');" class="w3-button w3-padding-2"><i class="fas fa-project-diagram"></i>&nbsp;&nbsp;&nbsp;<span class="w3-large"> {{name}}</span></a></td><td><span class="w3-label">{{description}}</span></td></tr>
       </table>
       </div>
       <div class="w3-card-2 w3-animate-left" id="command-container">
-	<h4><a class="w3-button" href="javascript: display_all_submodules()" ><span id="submodule_name">Previous Menu</span></a></h4>
-	<table class="w3-table w3-striped w3-white w3-animate-left" id="command_selector" >
-	<tr w3-repeat="commands" class="w3-animate-left"><td><a href="javascript: set_command('{{name}}');" class="w3-button w3-padding-2"><i class="fa fa-toolbox"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
+      <h4><a class="w3-button" href="javascript: display_all_submodules()" ><span id="submodule_name">Previous Menu</span></a></h4>
+      <table class="w3-table w3-striped w3-white w3-animate-left" id="command_selector" >
+      <tr w3-repeat="commands" class="w3-animate-left"><td><a href="javascript: set_command('{{name}}');" class="w3-button w3-padding-2"><i class="fa fa-toolbox"></i>&nbsp; {{name}}</a></td><td>{{description}}</td></tr>
       </table>
 
       </div>
@@ -198,28 +195,28 @@
     <h5>Countries</h5>
     <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
       <tr>
-	<td>United States</td>
-	<td>65%</td>
+      <td>United States</td>
+      <td>65%</td>
       </tr>
       <tr>
-	<td>UK</td>
-	<td>15.7%</td>
+      <td>UK</td>
+      <td>15.7%</td>
       </tr>
       <tr>
-	<td>Russia</td>
-	<td>5.6%</td>
+      <td>Russia</td>
+      <td>5.6%</td>
       </tr>
       <tr>
-	<td>Spain</td>
-	<td>2.1%</td>
+      <td>Spain</td>
+      <td>2.1%</td>
       </tr>
       <tr>
-	<td>India</td>
-	<td>1.9%</td>
+      <td>India</td>
+      <td>1.9%</td>
       </tr>
       <tr>
-	<td>France</td>
-	<td>1.5%</td>
+      <td>France</td>
+      <td>1.5%</td>
       </tr>
     </table><br>
     <button class="w3-button w3-dark-grey">More Countries &nbsp;<i class="fa fa-arrow-right"></i></button>
@@ -229,16 +226,16 @@
     <h5>Recent Users</h5>
     <ul class="w3-ul w3-card-4 w3-white">
       <li class="w3-padding-16">
-	<img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-	<span class="w3-xlarge">Mike</span><br>
+      <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+      <span class="w3-xlarge">Mike</span><br>
       </li>
       <li class="w3-padding-16">
-	<img src="/w3images/avatar5.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-	<span class="w3-xlarge">Jill</span><br>
+      <img src="/w3images/avatar5.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+      <span class="w3-xlarge">Jill</span><br>
       </li>
       <li class="w3-padding-16">
-	<img src="/w3images/avatar6.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-	<span class="w3-xlarge">Jane</span><br>
+      <img src="/w3images/avatar6.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+      <span class="w3-xlarge">Jane</span><br>
       </li>
     </ul>
   </div>
@@ -248,21 +245,21 @@
     <h5>Recent Comments</h5>
     <div class="w3-row">
       <div class="w3-col m2 text-center">
-	<img class="w3-circle" src="/w3images/avatar3.png" style="width:96px;height:96px">
+      <img class="w3-circle" src="/w3images/avatar3.png" style="width:96px;height:96px">
       </div>
       <div class="w3-col m10 w3-container">
-	<h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-	<p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+      <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
+      <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
       </div>
     </div>
 
     <div class="w3-row">
       <div class="w3-col m2 text-center">
-	<img class="w3-circle" src="/w3images/avatar1.png" style="width:96px;height:96px">
+      <img class="w3-circle" src="/w3images/avatar1.png" style="width:96px;height:96px">
       </div>
       <div class="w3-col m10 w3-container">
-	<h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-	<p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+      <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
+      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
       </div>
     </div>
   </div>
@@ -270,23 +267,23 @@
   <div class="w3-container w3-dark-grey w3-padding-32">
     <div class="w3-row">
       <div class="w3-container w3-third">
-	<h5 class="w3-bottombar w3-border-green">Demographic</h5>
-	<p>Language</p>
-	<p>Country</p>
-	<p>City</p>
+      <h5 class="w3-bottombar w3-border-green">Demographic</h5>
+      <p>Language</p>
+      <p>Country</p>
+      <p>City</p>
       </div>
       <div class="w3-container w3-third">
-	<h5 class="w3-bottombar w3-border-red">System</h5>
-	<p>Browser</p>
-	<p>OS</p>
-	<p>More</p>
+      <h5 class="w3-bottombar w3-border-red">System</h5>
+      <p>Browser</p>
+      <p>OS</p>
+      <p>More</p>
       </div>
       <div class="w3-container w3-third">
-	<h5 class="w3-bottombar w3-border-orange">Target</h5>
-	<p>Users</p>
-	<p>Active</p>
-	<p>Geo</p>
-	<p>Interests</p>
+      <h5 class="w3-bottombar w3-border-orange">Target</h5>
+      <p>Users</p>
+      <p>Active</p>
+      <p>Geo</p>
+      <p>Interests</p>
       </div>
     </div>
   </div>
@@ -309,26 +306,26 @@
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
       <div class="w3-center"><br>
-	<span onclick="document.getElementById('loginDialog').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-	<img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      <span onclick="document.getElementById('loginDialog').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">?</span>
+      <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 
       <form id="loginForm" class="w3-container" action="javascript:void(0)">
-	<div class="w3-section">
-	  <label><b>Username</b></label>
-	  <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="login" id="loginname" required>
-	  <label><b>Password</b></label>
-	  <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" id="loginpassword" required>
-	  <div style="text-align:center;padding:5px" id="loginError">
+      <div class="w3-section">
+        <label><b>Username</b></label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="login" id="loginname" required>
+        <label><b>Password</b></label>
+        <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" id="loginpassword" required>
+        <div style="text-align:center;padding:5px" id="loginError">
 
-	  </div>
+        </div>
 <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-	  <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
-	</div>
+        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+      </div>
       </form>
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-	<button onclick="document.getElementById('loginDialog').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-	<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+      <button onclick="document.getElementById('loginDialog').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+      <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
       </div>
 
     </div>
@@ -341,7 +338,7 @@
   <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
     <div class="w3-center"><br>
-    <span onclick="document.getElementById('siteDialog').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+    <span onclick="document.getElementById('siteDialog').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">?</span>
     <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
     </div>
 
@@ -373,7 +370,7 @@
   <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
     <div class="w3-center"><br>
-    <span onclick="document.getElementById('resultDialog').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+    <span onclick="document.getElementById('resultDialog').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">?</span>
     <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
     </div>
 

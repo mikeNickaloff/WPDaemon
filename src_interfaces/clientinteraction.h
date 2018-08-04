@@ -31,10 +31,12 @@ public:
     Submodule* currentSubmodule;
     ProcessLauncherThread* processLauncher;
     Q_INVOKABLE QVariant execute();
+    QVariant execute(Submodule* i_submodule);
     Q_INVOKABLE QVariant add_site(QString i_name, QString i_path);
     WebsiteController* websiteController;
     Q_INVOKABLE QVariant websites();
     Q_INVOKABLE bool set_current_site(QString sitename);
+    Q_INVOKABLE QVariant get_comments();
 signals:
     void requireLogin();
     void LoginSuccessful();
